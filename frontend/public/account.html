@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Your Account</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+  <!-- Slide-out Menu + Overlay -->
+  <!-- Slide-out Menu -->
+<div id="menu-overlay"></div>
+
+<nav id="side-menu">
+  <h2>Menu</h2>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="add-deal.html">Add Deal</a></li>
+    <li><a href="account.html">Account</a></li>
+    <li><a href="login.html">Login</a></li>
+  </ul>
+</nav>
+
+  <!-- Top Bar -->
+  <header class="top-bar">
+    <button class="top-btn top-btn--secondary">☰ Menu</button>
+    <button class="top-btn">Logout</button>
+  </header>
+
+  <div class="page">
+
+    <!-- Profile Header -->
+    <section class="profile-header">
+      <img class="profile-avatar" src="https://via.placeholder.com/120" alt="avatar">
+
+      <h2 class="profile-name">Addison</h2>
+      <p class="profile-bio">Local foodie. Deal hunter. Always exploring Rexburg eats.</p>
+
+      <div class="profile-stats">
+        <div><strong>12</strong><span>Deals Posted</span></div>
+        <div><strong>480</strong><span>Likes</span></div>
+        <div><strong>132</strong><span>Followers</span></div>
+      </div>
+    </section>
+
+    <h3 style="margin-top:1.5rem;">Your Deals</h3>
+
+    <main class="deals">
+
+      <article class="deal-card">
+        <div class="deal-main">
+          <div class="deal-picture">Pic</div>
+          <div class="deal-info">
+            <div class="deal-tag"><strong>20% OFF</strong></div>
+            <h2 class="deal-title">Taco Tuesday Special</h2>
+            <div class="deal-meta">
+              <div class="badge badge--likes">👍 120</div>
+              <div class="badge badge--rating">⭐ 4.8</div>
+            </div>
+          </div>
+        </div>
+        <div class="deal-details">
+          <div><span class="label">Location:</span> Main Street</div>
+          <div><span class="label">Time:</span> Tuesdays 5–9 PM</div>
+        </div>
+      </article>
+
+    </main>
+
+  </div>
+
+  <script>
+    const menuBtn = document.querySelector('.top-btn--secondary');
+    const sideMenu = document.getElementById('side-menu');
+    const overlay = document.getElementById('menu-overlay');
+
+    menuBtn.addEventListener('click', () => {
+      sideMenu.classList.add('active');
+      overlay.classList.add('active');
+    });
+
+    overlay.addEventListener('click', () => {
+      sideMenu.classList.remove('active');
+      overlay.classList.remove('active');
+    });
+  </script>
+
+</body>
+</html>

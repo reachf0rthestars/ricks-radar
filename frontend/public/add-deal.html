@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Add a Deal</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="auth-body">
+
+  <!-- Slide-out Menu + Overlay (same as index.html) -->
+  <!-- Slide-out Menu -->
+<div id="menu-overlay"></div>
+
+<nav id="side-menu">
+  <h2>Menu</h2>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="add-deal.html">Add Deal</a></li>
+    <li><a href="account.html">Account</a></li>
+    <li><a href="login.html">Login</a></li>
+  </ul>
+</nav>
+
+  <!-- Top Bar -->
+  <header class="top-bar" style="position:absolute; top:1rem; left:1rem; right:1rem;">
+    <button class="top-btn top-btn--secondary">☰ Menu</button>
+    <button class="top-btn">Account ▼</button>
+  </header>
+
+  <div class="auth-card" style="margin-top:4rem;">
+    <h1 class="auth-title">Add a Deal</h1>
+
+    <form class="auth-form">
+
+      <label>Deal Title</label>
+      <input type="text" placeholder="50% Off Burgers" required>
+
+      <label>Discount Amount</label>
+      <input type="text" placeholder="50%" required>
+
+      <label>Description</label>
+      <textarea placeholder="Describe the deal..." rows="3" required></textarea>
+
+      <label>Location</label>
+      <input type="text" placeholder="Downtown Rexburg" required>
+
+      <label>Time / Date</label>
+      <input type="text" placeholder="Fri–Sun, 5 PM – 9 PM" required>
+
+      <label>Image URL</label>
+      <input type="url" placeholder="https://example.com/image.jpg">
+
+      <button class="auth-btn">Submit Deal</button>
+    </form>
+  </div>
+
+  <script>
+    const menuBtn = document.querySelector('.top-btn--secondary');
+    const sideMenu = document.getElementById('side-menu');
+    const overlay = document.getElementById('menu-overlay');
+
+    menuBtn.addEventListener('click', () => {
+      sideMenu.classList.add('active');
+      overlay.classList.add('active');
+    });
+
+    overlay.addEventListener('click', () => {
+      sideMenu.classList.remove('active');
+      overlay.classList.remove('active');
+    });
+  </script>
+
+</body>
+</html>
