@@ -1,17 +1,99 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Ricks Radar</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-    <header>
-      <img src="images/ricks_radar_logo.png" alt="Ricks Radar Logo">
-      <h2>Ricks Radar</h2>
+<head>
+  <meta charset="UTF-8" />
+  <title>Deals Layout</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="page">
+    <!-- Top bar -->
+    <header class="top-bar">
+      <button class="top-btn top-btn--secondary">☰ Menu</button>
+      <button class="top-btn">Account ⮟</button>
     </header>
-  </body>
+
+    <!-- Logo -->
+    <div class="logo-wrap">
+      <div class="logo">LOGO</div>
+    </div>
+
+    <!-- Filters -->
+    <div class="filters">
+      <button class="pill pill--primary">
+        <span class="dot"></span>
+        Filters
+      </button>
+      <button class="pill">
+        <span class="dot"></span>
+        Category 1
+      </button>
+      <button class="pill">
+        <span class="dot"></span>
+        Category 2
+      </button>
+    </div>
+
+    <!-- Deals -->
+    <main class="deals">
+      <!-- First deal -->
+      <article class="deal-card">
+        <div class="deal-main">
+          <div class="deal-picture">
+            Picture
+          </div>
+          <div class="deal-info">
+            <div class="deal-tag">
+              <strong>35% OFF</strong>
+              <span>Limited time</span>
+            </div>
+            <h2 class="deal-title">Eye-catching Deal Title Goes Here</h2>
+            <div class="deal-meta">
+              <div class="badge badge--rating">⭐ 4.7 rating</div>
+              <div class="badge badge--likes">👍 320 likes</div>
+              <div class="badge badge--dislikes">👎 12 dislikes</div>
+            </div>
+          </div>
+        </div>
+        <div class="deal-details">
+          <div>
+            <span class="label">Description:</span>
+            Cozy local spot with great food and a vibrant atmosphere.
+          </div>
+          <div>
+            <span class="label">Location:</span>
+            Downtown Rexburg
+          </div>
+          <div>
+            <span class="label">Time/Date:</span>
+            Fri–Sun, 5 PM – 9 PM
+          </div>
+        </div>
+      </article>
+
+      <!-- Second deal -->
+      <article class="deal-card deal-card--secondary">
+        <h2 class="deal-title">Second Deal – Full Width Highlight</h2>
+        <div class="deal-meta" style="margin: 0.4rem 0 0.6rem;">
+          <div class="badge badge--rating">⭐ 4.3 rating</div>
+          <div class="badge badge--likes">👍 210 likes</div>
+        </div>
+        <div class="deal-details">
+          <div>
+            <span class="label">Description:</span>
+            Another great offer with a bold highlight area for extra attention.
+          </div>
+          <div>
+            <span class="label">Location:</span>
+            Nearby campus
+          </div>
+          <div>
+            <span class="label">Time/Date:</span>
+            All week, 11 AM – 8 PM
+          </div>
+        </div>
+      </article>
+    </main>
+  </div>
+</body>
 </html>
