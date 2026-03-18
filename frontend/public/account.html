@@ -3,29 +3,31 @@
 <head>
   <meta charset="UTF-8">
   <title>Your Account</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/pages.css">
+  <script defer src="front.js"></script>
 </head>
 
 <body>
 
   <!-- Slide-out Menu + Overlay -->
-  <!-- Slide-out Menu -->
-<div id="menu-overlay"></div>
+  <div id="menu-overlay"></div>
 
-<nav id="side-menu">
-  <h2>Menu</h2>
-  <ul>
-    <li><a href="index.html">Home</a></li>
-    <li><a href="add-deal.html">Add Deal</a></li>
-    <li><a href="account.html">Account</a></li>
-    <li><a href="login.html">Login</a></li>
-  </ul>
-</nav>
+  <nav id="side-menu">
+    <h2>Menu</h2>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="add-deal.html">Add Deal</a></li>
+      <li><a href="account.html">Account</a></li>
+      <li><a href="login.html">Login</a></li>
+    </ul>
+  </nav>
 
   <!-- Top Bar -->
   <header class="top-bar">
-    <button class="top-btn top-btn--secondary">☰ Menu</button>
-    <button class="top-btn">Logout</button>
+    <button class="top-btn top-btn--secondary" id="menu-btn">☰ Menu</button>
+    <button class="top-btn" id="logout-btn">Logout</button>
   </header>
 
   <div class="page">
@@ -38,13 +40,23 @@
       <p class="profile-bio">Local foodie. Deal hunter. Always exploring Rexburg eats.</p>
 
       <div class="profile-stats">
-        <div><strong>12</strong><span>Deals Posted</span></div>
-        <div><strong>480</strong><span>Likes</span></div>
-        <div><strong>132</strong><span>Followers</span></div>
+        <div>
+          <strong>12</strong>
+          <span>Deals Posted</span>
+        </div>
+        <div>
+          <strong>480</strong>
+          <span>Likes</span>
+        </div>
+        <div>
+          <strong>132</strong>
+          <span>Followers</span>
+        </div>
       </div>
     </section>
 
-    <h3 style="margin-top:1.5rem;">Your Deals</h3>
+    <!-- Deals Section -->
+    <h3 class="section-title">Your Deals</h3>
 
     <main class="deals">
 
@@ -69,22 +81,6 @@
     </main>
 
   </div>
-
-  <script>
-    const menuBtn = document.querySelector('.top-btn--secondary');
-    const sideMenu = document.getElementById('side-menu');
-    const overlay = document.getElementById('menu-overlay');
-
-    menuBtn.addEventListener('click', () => {
-      sideMenu.classList.add('active');
-      overlay.classList.add('active');
-    });
-
-    overlay.addEventListener('click', () => {
-      sideMenu.classList.remove('active');
-      overlay.classList.remove('active');
-    });
-  </script>
 
 </body>
 </html>

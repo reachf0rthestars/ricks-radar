@@ -1,68 +1,52 @@
-<!-- Deals -->
-<main class="deals">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login</title>
+  <link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/pages.css">
+  <script defer src="front.js"></script>
 
-  <!-- First Deal -->
-  <article class="deal-card">
-    <div class="deal-main">
-      <div class="deal-picture">
-        Picture
-      </div>
+  <!-- Firebase SDKs -->
+  <script defer src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
+  <script defer src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js"></script>
+  <script defer src="firebase-login.js"></script>
+</head>
 
-      <div class="deal-info">
-        <div class="deal-tag">
-          <strong>35% OFF</strong>
-          <span>Limited time</span>
-        </div>
+<body class="auth-body">
 
-        <h2 class="deal-title">Eye-catching Deal Title Goes Here</h2>
+  <!-- Slide-out Menu -->
+  <div id="menu-overlay"></div>
 
-        <div class="deal-meta">
-          <div class="badge badge--rating">⭐ 4.7 rating</div>
-          <div class="badge badge--likes">👍 320 likes</div>
-          <div class="badge badge--dislikes">👎 12 dislikes</div>
-        </div>
-      </div>
-    </div>
+  <nav id="side-menu">
+    <h2>Menu</h2>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="add-deal.html">Add Deal</a></li>
+      <li><a href="account.html">Account</a></li>
+      <li><a href="login.html">Login</a></li>
+    </ul>
+  </nav>
 
-    <div class="deal-details">
-      <div>
-        <span class="label">Description:</span>
-        Cozy local spot with great food and a vibrant atmosphere.
-      </div>
-      <div>
-        <span class="label">Location:</span>
-        Downtown Rexburg
-      </div>
-      <div>
-        <span class="label">Time/Date:</span>
-        Fri–Sun, 5 PM – 9 PM
-      </div>
-    </div>
-  </article>
+  <!-- Top Bar -->
+  <header class="top-bar" style="position:absolute; top:1rem; left:1rem; right:1rem;">
+    <button class="top-btn top-btn--secondary" id="menu-btn">☰ Menu</button>
+    <button class="top-btn">Back</button>
+  </header>
 
-  <!-- Second Deal (Full Width) -->
-  <article class="deal-card deal-card--secondary">
-    <h2 class="deal-title">Second Deal – Full Width Highlight</h2>
+  <!-- Login Card -->
+  <div class="auth-card" style="margin-top:4rem;">
+    <h1 class="auth-title">Sign In</h1>
 
-    <div class="deal-meta" style="margin: 0.4rem 0 0.6rem;">
-      <div class="badge badge--rating">⭐ 4.3 rating</div>
-      <div class="badge badge--likes">👍 210 likes</div>
-    </div>
+    <button id="google-login" class="auth-btn" style="background:#026BE3;">
+      Sign in with Google
+    </button>
 
-    <div class="deal-details">
-      <div>
-        <span class="label">Description:</span>
-        Another great offer with a bold highlight area for extra attention.
-      </div>
-      <div>
-        <span class="label">Location:</span>
-        Nearby campus
-      </div>
-      <div>
-        <span class="label">Time/Date:</span>
-        All week, 11 AM – 8 PM
-      </div>
-    </div>
-  </article>
+    <p class="auth-footer">
+      You must sign in to add deals or manage your account.
+    </p>
+  </div>
 
-</main>
+</body>
+</html>
