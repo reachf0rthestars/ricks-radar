@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login</title>
+  <link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/pages.css">
+  <script defer src="front.js"></script>
+
+  <!-- Firebase SDKs -->
+  <script defer src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
+  <script defer src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js"></script>
+  <script defer src="firebase-login.js"></script>
+</head>
+
+<body class="auth-body">
+
+  <!-- Slide-out Menu -->
+  <div id="menu-overlay"></div>
+
+  <nav id="side-menu">
+    <h2>Menu</h2>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="add-deal.html">Add Deal</a></li>
+      <li><a href="account.html">Account</a></li>
+      <li><a href="login.html">Login</a></li>
+    </ul>
+  </nav>
+
+  <!-- Top Bar -->
+  <header class="top-bar" style="position:absolute; top:1rem; left:1rem; right:1rem;">
+    <button class="top-btn top-btn--secondary" id="menu-btn">☰ Menu</button>
+    <button class="top-btn">Back</button>
+  </header>
+
+  <!-- Login Card -->
+  <div class="auth-card" style="margin-top:4rem;">
+    <h1 class="auth-title">Sign In</h1>
+
+    <button id="google-login" class="auth-btn" style="background:#026BE3;">
+      Sign in with Google
+    </button>
+
+    <p class="auth-footer">
+      You must sign in to add deals or manage your account.
+    </p>
+  </div>
+
+</body>
+</html>
