@@ -5,10 +5,17 @@
 
 /* Top Bar + Buttons */
 .top-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%; /* full screen */
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1.25rem;
+  padding: 12px 20px;
+  background: white;
+  border-bottom: 1px solid #eee;
+  z-index: 1000;
 }
 
 .top-btn {

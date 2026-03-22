@@ -15,10 +15,13 @@
     }
 
     body {
-  background: var(--bg);
-  color: var(--text);
-  padding: 0; /* remove side padding */
-}
+      background: var(--bg);
+      color: var(--text);
+      padding: 1rem;
+      display: flex;
+      justify-content: center;
+    }
+
     .page {
       width: 100%;
       max-width: 900px;
@@ -30,18 +33,12 @@
 
     /* Top bar */
     .top-bar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%; /* full screen */
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 12px 20px;
-  background: white;
-  border-bottom: 1px solid #eee;
-  z-index: 1000;
-}
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.25rem;
+    }
+
     .top-btn {
       border: none;
       padding: 0.5rem 1.1rem;

@@ -11,6 +11,15 @@
   align-items: center;
   height: 100vh;
 }
+.page {
+  width: 100%;
+  max-width: 900px;
+  margin: 80px auto 0; /* pushes content below fixed header */
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+  padding: 1.25rem 1.5rem 2rem;
+}
 
 .auth-card {
   width: 100%;
