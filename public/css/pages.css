@@ -88,3 +88,10 @@
   font-weight: 700;
   margin: 1.5rem 0 1rem;
 }
+
+/* Login Page */
+
+.google-btn {
+  margin: 15px auto;
+  display: block;
+}
