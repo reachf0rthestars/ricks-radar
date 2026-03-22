@@ -80,6 +80,10 @@
       background: linear-gradient(135deg, #fff 0%, #fff7e6 100%);
     }
 
+    .logo-img {
+      width: 200px;
+    }
+
     /* Filters */
     .filters {
       display: flex;
