@@ -67,7 +67,7 @@
     }
 
     .logo {
-      width: 160px;
+      width: 200px;
       height: 70px;
       border-radius: 999px;
       border: 3px solid var(--orange);
@@ -80,9 +80,7 @@
       background: linear-gradient(135deg, #fff 0%, #fff7e6 100%);
     }
 
-    .logo-img {
-      width: 200px;
-    }
+  
 
     /* Filters */
     .filters {
