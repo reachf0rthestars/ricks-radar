@@ -30,6 +30,7 @@ async function testFirebaseConfig() {
   }
 }
 
+// test the firebase config
 testFirebaseConfig();
 
 // Initialize the Apps
