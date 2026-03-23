@@ -30,8 +30,12 @@ async function testFirebaseConfig() {
   }
 }
 
+// test the console to see if it can be wrote it
+console.log("firebase-config.js is loaded...");
+
 // test the firebase config
 testFirebaseConfig();
+
 
 // Initialize the Apps
 const app = initializeApp(firebaseConfig);
