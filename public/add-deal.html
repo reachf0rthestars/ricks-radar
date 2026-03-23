@@ -38,7 +38,7 @@
       <label>Deal Title</label>
       <input type="text" placeholder="50% Off Burgers" required>
 
-      <label>Discount Amount</label>
+      <label>Discount type/title</label>
       <input type="text" placeholder="50%" required>
 
       <label>Description</label>
@@ -50,8 +50,15 @@
       <label>Time / Date</label>
       <input type="text" placeholder="Fri–Sun, 5 PM – 9 PM" required>
 
-      <label>Image URL</label>
-      <input type="url" placeholder="https://example.com/image.jpg">
+      <div class="image-upload">
+  <label>Upload Image (Optional)</label>
+  <input type="file" accept="image/*">
+</div>
+
+<div>
+  <label>Image URL (optional)</label>
+  <input type="url" placeholder="https://example.com/image.jpg">
+</div>
 
       <button class="auth-btn">Submit Deal</button>
     </form>
