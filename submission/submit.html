@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submission</title>
+    <script src="../backend/database.js" defer></script>
+</head>
+<body>
+    <form id="submissionForm" method="get">
+        <input type="text" id="title" placeholder="Title" required>
+        
+        <input type="text" id="description" placeholder="Describe the deal: (20 chars minimum)" minlength="20" required>
+        <select id="type">
+            <option value="">Select a deal type:</option>
+            <option value="food">Food</option>
+            <option value="activity">Activity</option>
+            <option value="house">Housing</option>
+            <option value="cloth">Clothing</option>
+            <option value="other">Other</option>
+        </select>
+        <select id="discountTyoe">
+            <option value="">Select the discount type:</option>
+            <option value="percent">Percentage/% off</option>
+            <option value="dollar">Dollars off</option>
+        </select>
+        <input type="text" id="percentage" placeholder="Percentage/% off:" pattern="[0-9.]{4}" required>
+        <input type="text" id="dollars" placeholder="Dollars off:" pattern="[0-9.]" required>
+        <input type="text" id="beforeCost" place="Original cost before discount:" pattern="[0-9.]">
+        <input type="text" id="cost" placeholder="Cost after discount:" pattern="[0-9.]">
+        <input type="text" id="location" placeholder="Where the deal is happening:" required>
+        <input type="text" id="address" placeholder="The address of the location:">
+        <div id="date">Expiration Date:</div>
+        <input type="text" id="month" placeholder="MM">
+        <input type="text" id="day" placeholder="YY" >
+    </form>
+</body>
+</html>
