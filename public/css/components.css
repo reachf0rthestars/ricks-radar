@@ -5,10 +5,17 @@
 
 /* Top Bar + Buttons */
 .top-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%; /* full screen */
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1.25rem;
+  padding: 12px 20px;
+  background: white;
+  border-bottom: 1px solid #eee;
+  z-index: 1000;
 }
 
 .top-btn {
@@ -38,18 +45,10 @@
   margin-bottom: 1.25rem;
 }
 
-.logo {
-  width: 160px;
-  height: 70px;
-  border-radius: 999px;
-  border: 3px solid var(--orange);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 800;
-  letter-spacing: 0.06em;
-  color: var(--orange);
-  background: linear-gradient(135deg, #fff 0%, #fff7e6 100%);
+.logo-img {
+  width: 160px;   /* adjust size */
+  height: auto;
+  object-fit: contain;
 }
 
 /* Filters / Pills */
@@ -184,6 +183,12 @@
   color: var(--blue);
 }
 
+.badge--saved {
+  background: rgba(2, 107, 227, 0.08);
+  color: var(--black);
+}
+
+
 .deal-details {
   border-radius: 10px;
   background: rgba(0, 0, 0, 0.02);
@@ -312,10 +317,6 @@
   .deal-main {
     grid-template-columns: 1fr;
   }
-}
-.image-upload input[type="file"] {
-  padding: 0.6rem;
-  background: #fff;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-}
+} 
+
+.

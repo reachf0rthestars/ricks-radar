@@ -17,9 +17,7 @@
 body {
   background: var(--bg);
   color: var(--text);
-  padding: 1rem;
-  display: flex;
-  justify-content: center;
+  padding: 0; /* remove side padding */
 }
 
 .page {
