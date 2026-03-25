@@ -9,7 +9,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+
+  min-height: 100vh;   /* ✅ allows growth */
+  padding: 4rem 0;     /* ✅ top & bottom spacing */
 }
 
 .auth-card {
@@ -19,6 +21,7 @@
   padding: 2rem;
   border-radius: 16px;
   box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  margin: 2rem 0;
 }
 
 .auth-title {
@@ -78,4 +81,14 @@
   font-size: 1.3rem;
   font-weight: 700;
   margin: 1.5rem 0 1rem;
+}
+.auth-form select {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  font-size: 1rem;
+  font-family: inherit;
+  background-color: #fff;
+  appearance: none; /* removes default arrow */
 }
