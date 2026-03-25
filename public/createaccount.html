@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Create Account & Profile</title>
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/pages.css">
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-storage-compat.js"></script>
+  <style>
+    .auth-body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background: var(--bg);
+    }
+
+    .auth-card {
+      width: 100%;
+      max-width: 400px;
+      background: #fff;
+      padding: 2rem;
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    }
+
+    .auth-card h1 {
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    .auth-form {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .auth-form label {
+      font-weight: 600;
+    }
+
+    .auth-form input, .auth-form textarea {
+      padding: 0.6rem 0.8rem;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+
+    .auth-btn {
+      margin-top: 1rem;
+      padding: 0.7rem;
+      border: none;
+      border-radius: 12px;
+      background: var(--blue);
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .auth-btn:hover {
+      background: #015ac0;
+    }
+
+    .profile-preview {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 1rem;
+    }
+
+    .profile-preview img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+  </style>
+</head>
+<body class="auth-body">
+
+  <div class="auth-card">
+    <h1>Create Your Profile</h1>
+
+    <!-- Step 1: Sign in with Google -->
+    <button id="google-signup" class="auth-btn">Sign in with Google</button>
+
+    <!-- Step 2: Profile Setup Form -->
+    <form id="profile-form" class="auth-form" style="display:none;">
+      <div class="profile-preview">
+        <img id="profile-img-preview" src="https://via.placeholder.com/100" alt="Profile Preview">
+      </div>
+
+      <label for="username">Username</label>
+      <input type="text" id="username" placeholder="Choose a username" required>
+
+      <label for="bio">Bio / Description</label>
+      <textarea id="bio" rows="3" placeholder="Tell us about yourself..." required></textarea>
+
+      <label for="profileImage">Profile Image (optional)</label>
+      <input type="file" id="profileImage" accept="image/*">
+
+      <button type="submit" class="auth-btn">Save Profile</button>
+    </form>
+  </div>
+
+  <script>
+    // ====================
+    // 1. Firebase Config
+    // ====================
+    const firebaseConfig = {
+      apiKey: "YOUR_API_KEY",
+      authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+      projectId: "YOUR_PROJECT_ID",
+      storageBucket: "YOUR_PROJECT_ID.appspot.com",
+      messagingSenderId: "YOUR_SENDER_ID",
+      appId: "YOUR_APP_ID"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const db = firebase.firestore();
+    const storage = firebase.storage();
+
+    // ====================
+    // 2. Google Sign-in
+    // ====================
+    const googleBtn = document.getElementById('google-signup');
+    const profileForm = document.getElementById('profile-form');
+
+    let currentUser = null;
+
+    googleBtn.addEventListener('click', async () => {
+      const provider = new firebase.auth.GoogleAuthProvider();
+      try {
+        const result = await auth.signInWithPopup(provider);
+        currentUser = result.user;
+        googleBtn.style.display = 'none';
+        profileForm.style.display = 'flex';
+
+        // Pre-fill profile image preview from Google account
+        document.getElementById('profile-img-preview').src = currentUser.photoURL || 'https://via.placeholder.com/100';
+      } catch (err) {
+        alert(err.message);
+      }
+    });
+
+    // ====================
+    // 3. Profile Form Submission
+    // ====================
+    profileForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const username = document.getElementById('username').value.trim();
+      const bio = document.getElementById('bio').value.trim();
+      const file = document.getElementById('profileImage').files[0];
+
+      let profileImageURL = currentUser.photoURL || '';
+
+      // If user uploaded a custom image, upload to Firebase Storage
+      if (file) {
+        const storageRef = storage.ref(`profileImages/${currentUser.uid}_${file.name}`);
+        await storageRef.put(file);
+        profileImageURL = await storageRef.getDownloadURL();
+      }
+
+      // Save user data to Firestore
+      await db.collection('users').doc(currentUser.uid).set({
+        username: username,
+        displayName: currentUser.displayName,
+        email: currentUser.email,
+        bio: bio,
+        profileImage: profileImageURL,
+        dealsPosted: 0,
+        likes: 0,
+        followers: 0,
+        savedDeals: 0
+      });
+
+      alert('Profile saved successfully!');
+      window.location.href = 'account.html'; // redirect to account page
+    });
+  </script>
+
+</body>
+</html>

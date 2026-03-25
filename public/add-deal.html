@@ -7,43 +7,45 @@
   <link rel="stylesheet" href="css/components.css">
   <link rel="stylesheet" href="css/pages.css">
   <style>
-    /* Categories section */
-    .categories {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-bottom: 1rem;
-    }
+   /* Categories Section */
+.categories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
 
-    .pill {
-      border-radius: 999px;
-      padding: 0.4rem 0.9rem;
-      font-size: 0.85rem;
-      border: 1px solid rgba(0, 0, 0, 0.08);
-      background: #fff;
-      display: inline-flex; /* ensures visible */
-      align-items: center;
-      gap: 0.35rem;
-      cursor: pointer;
-      transition: background 0.15s, transform 0.1s, box-shadow 0.15s;
-    }
+.pill {
+  border-radius: 999px;
+  padding: 0.4rem 0.9rem;
+  font-size: 0.85rem;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  background: #fff;
+  display: inline-flex; /* ensures visible */
+  align-items: center;
+  gap: 0.35rem;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.1s, box-shadow 0.15s;
+  color: #000; /* default text color */
+}
 
-    .pill.active {
-      filter: brightness(0.9);
-      background-color: #026BE3;
-      color: #fff;
-    }
+.pill span.dot{
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
 
-    .pill span.dot{
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-    }
+.food span.dot { background: var(--green); }
+.groceries span.dot { background: var(--blue); }
+.services span.dot { background: var(--orange); }
+.other span.dot { background: var(--grey); }
 
-    .food span.dot { background: var(--green); }
-    .groceries span.dot { background: var(--blue); }
-    .services span.dot { background: var(--orange); }
-    .other span.dot { background: var(--grey); }
+/* Active category pill: black background, white text */
+.categories .pill.active {
+  background-color: #000;
+  color: #fff;
+  filter: brightness(1); /* remove brightness effect from before */
+}
   </style>
 </head>
 
@@ -58,6 +60,7 @@
       <li><a href="add-deal.html">Add Deal</a></li>
       <li><a href="account.html">Account</a></li>
       <li><a href="login.html">Login</a></li>
+      <li><a href="about.html">About Us</a></li>
     </ul>
   </nav>
 
