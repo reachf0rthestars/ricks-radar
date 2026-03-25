@@ -46,8 +46,6 @@
 }
 
 .logo-img {
-  width: 160px;   /* adjust size */
-  height: auto;
   object-fit: contain;
 }
 
@@ -72,21 +70,45 @@
   transition: background 0.15s, transform 0.1s, box-shadow 0.15s;
 }
 
-.pill span.dot {
+.filters button:not(.pill--primary) {
+  display: none;
+}
+
+.filters.show-filters button:not(.pill--primary) {
+  display: inline-flex;
+}
+
+.pill.active {
+  filter: brightness(0.9);
+}
+
+.pill span.dot{
   width: 8px;
   height: 8px;
   border-radius: 50%;
+}
+.food span.dot {
   background: var(--green);
 }
 
+.groceries span.dot {
+  background: var(--blue);
+}
+
+.services span.dot {
+  background: var(--orange);
+}
+
+.other span.dot {
+  background: var(--grey);
+}
+
 .pill--primary {
-  background: var(--yellow);
-  border-color: var(--yellow);
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
 }
 
 .pill--primary span.dot {
-  background: var(--orange);
+  background: var(--grey);
 }
 
 .pill:hover {
@@ -319,4 +341,4 @@
   }
 } 
 
-.
+
