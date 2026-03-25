@@ -29,10 +29,11 @@
       <button class="top-btn">Account ⮟</button>
     </header>
 
-    <!-- Logo -->
-    <div class="logo-wrap">
-      <div class="logo">LOGO</div>
-    </div>
+<div class="header">
+  <!-- Logo -->
+  <div class="logo-wrap">
+    <img class="logo" src="/public/images/Horiz-Logo.png" alt="Rick's Radar Logo" width="320" height="140">
+</div>
 
     <!-- Filters -->
     <div class="filters">
@@ -40,13 +41,21 @@
         <span class="dot"></span>
         Filters
       </button>
-      <button class="pill">
+      <button class="pill food">
         <span class="dot"></span>
-        Category 1
+        Food
       </button>
-      <button class="pill">
+      <button class="pill groceries">
         <span class="dot"></span>
-        Category 2
+        Groceries
+      </button>
+      <button class="pill services">
+        <span class="dot"></span>
+        Services
+      </button>
+      <button class="pill other">
+        <span class="dot"></span>
+        Other
       </button>
     </div>
 <!-- Deals -->
@@ -68,7 +77,6 @@
         <h2 class="deal-title">Eye-catching Deal Title Goes Here</h2>
 
         <div class="deal-meta">
-          <div class="badge badge--rating">⭐ 4.7 rating</div>
           <div class="badge badge--likes">👍 320 likes</div>
           <div class="badge badge--dislikes">👎 12 dislikes</div>
         </div>
@@ -96,8 +104,8 @@
     <h2 class="deal-title">Second Deal – Full Width Highlight</h2>
 
     <div class="deal-meta" style="margin: 0.4rem 0 0.6rem;">
-      <div class="badge badge--rating">⭐ 4.3 rating</div>
       <div class="badge badge--likes">👍 210 likes</div>
+      <div class="badge badge--dislikes">👎 13 dislikes</div>
     </div>
 
     <div class="deal-details">
@@ -115,7 +123,55 @@
       </div>
     </div>
   </article>
+  <script>
+    const filtersContainer = document.querySelector('.filters');
+    const mainButton = filtersContainer.querySelector('.pill--primary');
+    const filterButtons = filtersContainer.querySelectorAll('button:not(.pill--primary)');
 
+    // Toggle visibility of filter buttons
+    mainButton.addEventListener('click', () => {
+      filtersContainer.classList.toggle('show-filters');
+    });
+
+    // Track active filters
+    const activeFilters = new Set();
+
+    filterButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const filterClass = [...button.classList].find(cls => 
+          cls !== 'pill'
+        );
+
+        // Toggle active state
+        if (activeFilters.has(filterClass)) {
+          activeFilters.delete(filterClass);
+          button.classList.remove('active');
+        } else {
+          activeFilters.add(filterClass);
+          button.classList.add('active');
+        }
+
+        applyFilters();
+      });
+    });
+
+    function applyFilters() {
+      const cards = document.querySelectorAll('.card'); // assumed class
+
+      cards.forEach(card => {
+        if (activeFilters.size === 0) {
+          card.style.display = '';
+          return;
+        }
+
+        const hasMatch = [...activeFilters].some(filter => 
+          card.querySelector(`.${filter}`)
+        );
+
+        card.style.display = hasMatch ? '' : 'none';
+      });
+    }
+  </script>
 </main>
   </div>
 </body>
