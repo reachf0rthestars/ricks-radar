@@ -190,11 +190,6 @@
   background: rgba(0, 0, 0, 0.04);
 }
 
-.badge--rating {
-  background: rgba(255, 111, 44, 0.12);
-  color: var(--orange);
-}
-
 .badge--likes {
   background: rgba(89, 195, 9, 0.12);
   color: var(--green);
