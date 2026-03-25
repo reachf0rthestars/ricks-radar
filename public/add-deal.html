@@ -6,13 +6,51 @@
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/components.css">
   <link rel="stylesheet" href="css/pages.css">
+  <style>
+    /* Categories section */
+    .categories {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .pill {
+      border-radius: 999px;
+      padding: 0.4rem 0.9rem;
+      font-size: 0.85rem;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      background: #fff;
+      display: inline-flex; /* ensures visible */
+      align-items: center;
+      gap: 0.35rem;
+      cursor: pointer;
+      transition: background 0.15s, transform 0.1s, box-shadow 0.15s;
+    }
+
+    .pill.active {
+      filter: brightness(0.9);
+      background-color: #026BE3;
+      color: #fff;
+    }
+
+    .pill span.dot{
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    .food span.dot { background: var(--green); }
+    .groceries span.dot { background: var(--blue); }
+    .services span.dot { background: var(--orange); }
+    .other span.dot { background: var(--grey); }
+  </style>
 </head>
 
 <body class="auth-body">
 
   <!-- Slide-out Menu -->
   <div id="menu-overlay"></div>
-
   <nav id="side-menu">
     <h2>Menu</h2>
     <ul>
@@ -24,12 +62,12 @@
   </nav>
 
   <!-- Top Bar -->
-  <header class="top-bar" style="position:absolute; top:1rem; left:1rem; right:1rem;">
+  <header class="top-bar">
     <button class="top-btn top-btn--secondary">☰ Menu</button>
     <button class="top-btn">Account ▼</button>
   </header>
 
-  <div class="auth-card" style="margin-top:4rem;">
+  <div class="auth-card" style="margin-top:5rem;">
     <h1 class="auth-title">Add a Deal</h1>
 
     <form class="auth-form">
@@ -43,15 +81,25 @@
       <label>Description</label>
       <textarea placeholder="Describe the deal..." rows="3" required></textarea>
 
-      <label>Category</label>
-      <select required>
-        <option value="">Select a category</option>
-        <option value="category1">Category 1</option>
-        <option value="category2">Category 2</option>
-        <option value="category3">Category 3</option>
-        <option value="category4">Category 4</option>
-        <option value="category5">Category 5</option>
-      </select>
+      <!-- Categories Section -->
+      <label>Categories</label>
+      <div class="categories">
+        <button type="button" class="pill category food" data-value="food">
+          <span class="dot"></span> Food
+        </button>
+        <button type="button" class="pill category groceries" data-value="groceries">
+          <span class="dot"></span> Groceries
+        </button>
+        <button type="button" class="pill category services" data-value="services">
+          <span class="dot"></span> Services
+        </button>
+        <button type="button" class="pill category other" data-value="other">
+          <span class="dot"></span> Other
+        </button>
+      </div>
+
+      <!-- Hidden input to store selected categories -->
+      <input type="hidden" name="categories" id="selected-categories">
 
       <label>Location</label>
       <input type="text" placeholder="Downtown Rexburg" required>
@@ -72,6 +120,7 @@
   </div>
 
   <script>
+    // Slide-out menu toggle
     const menuBtn = document.querySelector('.top-btn--secondary');
     const sideMenu = document.getElementById('side-menu');
     const overlay = document.getElementById('menu-overlay');
@@ -86,7 +135,26 @@
       overlay.classList.remove('active');
     });
 
-    // Prevent past dates for expiration
+    // Categories multi-select
+    const categoryButtons = document.querySelectorAll('.categories .category');
+    const hiddenInput = document.getElementById('selected-categories');
+    let selected = [];
+
+    categoryButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const value = btn.dataset.value;
+        if (selected.includes(value)) {
+          selected = selected.filter(v => v !== value);
+          btn.classList.remove('active');
+        } else {
+          selected.push(value);
+          btn.classList.add('active');
+        }
+        hiddenInput.value = selected.join(',');
+      });
+    });
+
+    // Expiration date: prevent past dates
     const dateInput = document.getElementById('expiration-date');
     const today = new Date().toISOString().split('T')[0];
     dateInput.min = today;
