@@ -78,8 +78,8 @@
         <h2 class="deal-title">Eye-catching Deal Title Goes Here</h2>
 
         <div class="deal-meta">
-          <div class="badge badge--likes">👍 320 likes</div>
-          <div class="badge badge--dislikes">👎 12 dislikes</div>
+          <button class="badge badge--likes">👍 320 likes</button>
+          <button class="badge badge--dislikes">👎 12 dislikes</button>
         </div>
       </div>
     </div>
@@ -105,8 +105,8 @@
     <h2 class="deal-title">Second Deal – Full Width Highlight</h2>
 
     <div class="deal-meta" style="margin: 0.4rem 0 0.6rem;">
-      <div class="badge badge--likes">👍 210 likes</div>
-      <div class="badge badge--dislikes">👎 13 dislikes</div>
+      <button class="badge badge--likes">👍 210 likes</button>
+      <button class="badge badge--dislikes">👎 13 dislikes</button>
     </div>
 
     <div class="deal-details">
@@ -172,6 +172,14 @@
         card.style.display = hasMatch ? '' : 'none';
       });
     }
+
+    const badges = document.querySelectorAll('.badge');
+
+    badges.forEach(badge => {
+      badge.addEventListener('click', () => {
+        badge.classList.toggle('active');
+      });
+    });
   </script>
 </main>
   </div>
