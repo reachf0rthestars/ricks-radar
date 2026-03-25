@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <title>Login</title>
   <link rel="stylesheet" href="css/base.css">
-<link rel="stylesheet" href="css/components.css">
-<link rel="stylesheet" href="css/pages.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/pages.css">
   <script defer src="front.js"></script>
 
   <!-- Firebase SDKs -->
@@ -26,6 +26,7 @@
       <li><a href="add-deal.html">Add Deal</a></li>
       <li><a href="account.html">Account</a></li>
       <li><a href="login.html">Login</a></li>
+      <li><a href="about.html">About Us</a></li>
     </ul>
   </nav>
 
@@ -39,12 +40,18 @@
   <div class="auth-card" style="margin-top:4rem;">
     <h1 class="auth-title">Sign In</h1>
 
-    <button id="google-login" class="auth-btn" style="background:#026BE3;">
+    <button id="google-login" class="auth-btn google-btn" style="background:#026BE3;">
       Sign in with Google
     </button>
 
     <p class="auth-footer">
       You must sign in to add deals or manage your account.
+    </p>
+
+    <!-- Create Account Link -->
+    <p class="auth-footer">
+      Don't have an account? 
+      <a href="createaccount.html" style="color: var(--blue); font-weight:600;">Create Account</a>
     </p>
   </div>
 

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Add a Deal</title>
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/pages.css">
+  <style>
+   /* Categories Section */
+.categories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.pill {
+  border-radius: 999px;
+  padding: 0.4rem 0.9rem;
+  font-size: 0.85rem;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  background: #fff;
+  display: inline-flex; /* ensures visible */
+  align-items: center;
+  gap: 0.35rem;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.1s, box-shadow 0.15s;
+  color: #000; /* default text color */
+}
+
+.pill span.dot{
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.food span.dot { background: var(--green); }
+.groceries span.dot { background: var(--blue); }
+.services span.dot { background: var(--orange); }
+.other span.dot { background: var(--grey); }
+
+/* Active category pill: black background, white text */
+.categories .pill.active {
+  background-color: #000;
+  color: #fff;
+  filter: brightness(1); /* remove brightness effect from before */
+}
+  </style>
+</head>
+
+<body class="auth-body">
+
+  <!-- Slide-out Menu -->
+  <div id="menu-overlay"></div>
+  <nav id="side-menu">
+    <h2>Menu</h2>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="add-deal.html">Add Deal</a></li>
+      <li><a href="account.html">Account</a></li>
+      <li><a href="login.html">Login</a></li>
+      <li><a href="about.html">About Us</a></li>
+    </ul>
+  </nav>
+
+  <!-- Top Bar -->
+  <header class="top-bar">
+    <button class="top-btn top-btn--secondary">☰ Menu</button>
+    <button class="top-btn">Account ▼</button>
+  </header>
+
+  <div class="auth-card" style="margin-top:5rem;">
+    <h1 class="auth-title">Add a Deal</h1>
+
+    <form class="auth-form">
+
+      <label>Deal Title</label>
+      <input type="text" placeholder="50% Off Burgers" required>
+
+      <label>Discount type/title</label>
+      <input type="text" placeholder="50%" required>
+
+      <label>Description</label>
+      <textarea placeholder="Describe the deal..." rows="3" required></textarea>
+
+      <!-- Categories Section -->
+      <label>Categories</label>
+      <div class="categories">
+        <button type="button" class="pill category food" data-value="food">
+          <span class="dot"></span> Food
+        </button>
+        <button type="button" class="pill category groceries" data-value="groceries">
+          <span class="dot"></span> Groceries
+        </button>
+        <button type="button" class="pill category services" data-value="services">
+          <span class="dot"></span> Services
+        </button>
+        <button type="button" class="pill category other" data-value="other">
+          <span class="dot"></span> Other
+        </button>
+      </div>
+
+      <!-- Hidden input to store selected categories -->
+      <input type="hidden" name="categories" id="selected-categories">
+
+      <label>Location</label>
+      <input type="text" placeholder="Downtown Rexburg" required>
+
+      <label>Time / Date</label>
+      <input type="text" placeholder="Fri–Sun, 5 PM – 9 PM" required>
+
+      <label>Expiration Date</label>
+      <input type="date" id="expiration-date" required>
+
+      <div class="image-upload">
+        <label>Upload Image (Optional)</label>
+        <input type="file" accept="image/*">
+      </div>
+
+      <button class="auth-btn">Submit Deal</button>
+    </form>
+  </div>
+
+  <script>
+    // Slide-out menu toggle
+    const menuBtn = document.querySelector('.top-btn--secondary');
+    const sideMenu = document.getElementById('side-menu');
+    const overlay = document.getElementById('menu-overlay');
+
+    menuBtn.addEventListener('click', () => {
+      sideMenu.classList.add('active');
+      overlay.classList.add('active');
+    });
+
+    overlay.addEventListener('click', () => {
+      sideMenu.classList.remove('active');
+      overlay.classList.remove('active');
+    });
+
+    // Categories multi-select
+    const categoryButtons = document.querySelectorAll('.categories .category');
+    const hiddenInput = document.getElementById('selected-categories');
+    let selected = [];
+
+    categoryButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const value = btn.dataset.value;
+        if (selected.includes(value)) {
+          selected = selected.filter(v => v !== value);
+          btn.classList.remove('active');
+        } else {
+          selected.push(value);
+          btn.classList.add('active');
+        }
+        hiddenInput.value = selected.join(',');
+      });
+    });
+
+    // Expiration date: prevent past dates
+    const dateInput = document.getElementById('expiration-date');
+    const today = new Date().toISOString().split('T')[0];
+    dateInput.min = today;
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Ricks Radar</title>
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/pages.css">
+    <style>
+      #body-about {
+        display: grid;
+        grid-template-columns: 1fr 4fr 1fr;
+        grid-template-rows: 1fr 1fr;
+      }
+      #hero-about {
+        grid-column: 2/3;
+        grid-row: 1/2;
+      }
+      #about_contact {
+        grid-column: 2/3;
+        grid-row: 2/3;
+      }
+    </style>
+</head>
+<body>
+    <main>
+      <nav id="side-menu">
+        <h2>Menu</h2>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="add-deal.html">Add Deal</a></li>
+          <li><a href="account.html">Account</a></li>
+          <li><a href="login.html">Login</a></li>
+        </ul>
+      </nav>
+    <header>
+      <header class="top-bar">
+      <button class="top-btn top-btn--secondary" id="menu-btn">☰ Menu</button>
+      <button class="top-btn">Account ⮟</button>
+    </header>
+      <div id="body-about">
+        <section id="hero-about">
+            <h1>Our Signal, Our Guide</h1>
+            <p>
+              Our mission is to help students in Rexburg, Idaho save money 
+              by finding and sharing the best local deals and sales. As a 
+              business run by students for students, we are committed to 
+              supporting our community, making everyday life more affordable, 
+              and helping others while working together to create value for everyone.
+            </p>
+        </section>
+        <div id="about_content">
+          <section class="content_card_about">
+            <h2>Background</h2>
+            <p>
+              We are a collective of students at Brigham Young University. When prompted to build a website and an 
+              app, we decided to look towards our community, identify a need, and try our best to offer a solution.
+              It is with this in mind that we offer you Rick's Radar!
+            </p>
+          </section>
+          <section class="content_card_about">
+            <h2>What is Ricks Radar?</h2>
+            <p>
+              Ricks Radar is way for students at BYUI to find localized sales and discounts. It works by users like you submitting deals
+              as you find them walking about. Deals will also be added by our team as we discover them. It functions like a social media
+              app in that you can scroll to view already submitted deals, and can post ones you find. You will be required to input ____, ____, and _____.
+            </p>
+          </section>
+        </div>
+      </div>
+      <button><a href="index.html">Start Saving Now</a></button>
+      <script>
+  const menuBtn = document.getElementById('menu-btn');
+  const sideMenu = document.getElementById('side-menu');
+  const menuOverlay = document.createElement('div');
+
+  // Add an overlay to cover rest of the screen when menu is open
+  menuOverlay.id = 'menu-overlay';
+  document.body.appendChild(menuOverlay);
+
+  // Toggle menu visibility
+  menuBtn.addEventListener('click', () => {
+    sideMenu.classList.toggle('active');
+    menuOverlay.classList.toggle('active');
+  });
+
+  // Clicking the overlay closes the menu
+  menuOverlay.addEventListener('click', () => {
+    sideMenu.classList.remove('active');
+    menuOverlay.classList.remove('active');
+  });
+</script>
+
+<style>
+  /* Hide side menu and overlay by default */
+  #side-menu {
+    position: fixed;
+    top: 0; left: 0;
+    width: 250px;
+    height: 100%;
+    background: white;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.3);
+    transform: translateX(-260px);
+    transition: transform 0.3s ease;
+    z-index: 1000;
+  }
+  #side-menu.active {
+    transform: translateX(0);
+  }
+  #menu-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.3);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 900;
+  }
+  #menu-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+  }
+</style>
+    </main>
+</body>
+</html>

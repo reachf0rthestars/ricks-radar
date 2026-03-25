@@ -1,3 +1,6 @@
+ /* old file dont use kept for refrence only! */
+ 
+ 
  :root {
       --green: #59C309;
       --yellow: #FFEF5E;
@@ -5,6 +8,7 @@
       --blue: #026BE3;
       --bg: #f7f7f7;
       --text: #222;
+      --grey:#454545;
     }
 
     * {
@@ -67,18 +71,18 @@
     }
 
     .logo {
-      width: 160px;
+      width: 320px;
       height: 70px;
       border-radius: 999px;
-      border: 3px solid var(--orange);
       display: flex;
       align-items: center;
       justify-content: center;
       font-weight: 800;
       letter-spacing: 0.06em;
-      color: var(--orange);
       background: linear-gradient(135deg, #fff 0%, #fff7e6 100%);
     }
+
+  
 
     /* Filters */
     .filters {
@@ -101,21 +105,45 @@
       transition: background 0.15s, transform 0.1s, box-shadow 0.15s;
     }
 
-    .pill span.dot {
+    .filters button:not(.pill--primary) {
+      display: none;
+    }
+
+    .filters.show-filters button:not(.pill--primary) {
+      display: inline-flex;
+    }
+
+    .pill.active {
+      filter: brightness(0.9);
+    }
+
+    .pill span.dot{
       width: 8px;
       height: 8px;
       border-radius: 50%;
+    }
+    .food span.dot {
       background: var(--green);
     }
 
+    .groceries span.dot {
+      background: var(--blue);
+    }
+
+    .services span.dot {
+      background: var(--orange);
+    }
+
+    .other span.dot {
+      background: var(--grey);
+    }
+
     .pill--primary {
-      background: var(--yellow);
-      border-color: var(--yellow);
       box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
     }
 
     .pill--primary span.dot {
-      background: var(--orange);
+      background: var(--grey);
     }
 
     .pill:hover {

@@ -5,10 +5,17 @@
 
 /* Top Bar + Buttons */
 .top-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%; /* full screen */
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1.25rem;
+  padding: 12px 20px;
+  background: white;
+  border-bottom: 1px solid #eee;
+  z-index: 1000;
 }
 
 .top-btn {
@@ -38,18 +45,8 @@
   margin-bottom: 1.25rem;
 }
 
-.logo {
-  width: 160px;
-  height: 70px;
-  border-radius: 999px;
-  border: 3px solid var(--orange);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 800;
-  letter-spacing: 0.06em;
-  color: var(--orange);
-  background: linear-gradient(135deg, #fff 0%, #fff7e6 100%);
+.logo-img {
+  object-fit: contain;
 }
 
 /* Filters / Pills */
@@ -73,21 +70,45 @@
   transition: background 0.15s, transform 0.1s, box-shadow 0.15s;
 }
 
-.pill span.dot {
+.filters button:not(.pill--primary) {
+  display: none;
+}
+
+.filters.show-filters button:not(.pill--primary) {
+  display: inline-flex;
+}
+
+.pill.active {
+  filter: brightness(0.9);
+}
+
+.pill span.dot{
   width: 8px;
   height: 8px;
   border-radius: 50%;
+}
+.food span.dot {
   background: var(--green);
 }
 
+.groceries span.dot {
+  background: var(--blue);
+}
+
+.services span.dot {
+  background: var(--orange);
+}
+
+.other span.dot {
+  background: var(--grey);
+}
+
 .pill--primary {
-  background: var(--yellow);
-  border-color: var(--yellow);
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
 }
 
 .pill--primary span.dot {
-  background: var(--orange);
+  background: var(--grey);
 }
 
 .pill:hover {
@@ -169,20 +190,32 @@
   background: rgba(0, 0, 0, 0.04);
 }
 
-.badge--rating {
-  background: rgba(255, 111, 44, 0.12);
-  color: var(--orange);
-}
-
 .badge--likes {
   background: rgba(89, 195, 9, 0.12);
   color: var(--green);
+  border: none;
 }
 
 .badge--dislikes {
   background: rgba(2, 107, 227, 0.08);
   color: var(--blue);
+  border: none;
 }
+
+/* Active (toggled) state */
+.badge.active {
+  color: #fff;
+}
+
+/* Specific active backgrounds using existing colors */
+.badge--likes.active {
+  background: var(--green);
+}
+
+.badge--dislikes.active {
+  background: var(--blue);
+}
+
 
 .deal-details {
   border-radius: 10px;
@@ -312,4 +345,6 @@
   .deal-main {
     grid-template-columns: 1fr;
   }
-}
+} 
+
+
