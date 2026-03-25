@@ -1,15 +1,16 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-import { getAuth } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-import { getFirestore } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js";
+import { getAuth } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-auth.js";
+import { getFirestore } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-firestore.js";
 
-const firebaseConfig = {
-  apiKey: import.meta.env.FIREBASE_CONFIG_API_KEY,
-  authDomain: "ricksradar.firebaseapp.com",
-  projectId: "ricksradar",
-  storageBucket: "ricksradar.firebasestorage.app",
-  messagingSenderId: import.meta.env.FIREBASE_CONFIG_MESSAGING_SENDER_ID,
-  appId: import.meta.env.FIREBASE_CONFIG_APP_ID,
-};
+ // Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyB0twUQGPv--7re_dU2hfvEtVdXd0zALrs",
+    authDomain: "ricksradar.firebaseapp.com",
+    projectId: "ricksradar",
+    storageBucket: "ricksradar.firebasestorage.app",
+    messagingSenderId: "624236538983",
+    appId: "1:624236538983:web:3879f6d7b0c359a6d7b8c2"
+  };
 
 async function testFirebaseConfig() {
   try {
