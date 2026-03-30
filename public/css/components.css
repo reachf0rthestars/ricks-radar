@@ -170,13 +170,21 @@
 }
 
 .deal-meta {
+  border:none;
   display: flex;
   flex-wrap: wrap;
   gap: 0.6rem;
   font-size: 0.8rem;
   color: #555;
 }
+.badge {
+  border: 1px solid transparent; /* prevents layout shift */
+}
 
+.badge:focus {
+  outline: none;                 /* remove default black outline */
+  border-color: #ccc;            /* light gray border */
+}
 .badge {
   background: rgba(0, 0, 0, 0.04);
   border-radius: 999px;
