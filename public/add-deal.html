@@ -6,6 +6,12 @@
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/components.css">
   <link rel="stylesheet" href="css/pages.css">
+  <script src="./backend/firebase-config.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-storage-compat.js"></script>
+  <script src="./backend/deals-service.js"></script>
   <style>
    /* Categories Section */
 .categories {
@@ -76,13 +82,13 @@
     <form class="auth-form">
 
       <label>Deal Title</label>
-      <input type="text" placeholder="50% Off Burgers" required>
+      <input class="title" type="text" placeholder="50% Off Burgers" required>
 
-      <label>Discount type/title</label>
-      <input type="text" placeholder="50%" required>
+      <label>Discount amount</label>
+      <input class="amount" type="text" placeholder="50%" required>
 
       <label>Description</label>
-      <textarea placeholder="Describe the deal..." rows="3" required></textarea>
+      <textarea class="description" placeholder="Describe the deal..." rows="3" required></textarea>
 
       <!-- Categories Section -->
       <label>Categories</label>
@@ -105,17 +111,17 @@
       <input type="hidden" name="categories" id="selected-categories">
 
       <label>Location</label>
-      <input type="text" placeholder="Downtown Rexburg" required>
+      <input class="location" type="text" placeholder="Downtown Rexburg" required>
 
       <label>Time / Date</label>
-      <input type="text" placeholder="Fri–Sun, 5 PM – 9 PM" required>
+      <input class="time" type="text" placeholder="Fri–Sun, 5 PM – 9 PM" required>
 
       <label>Expiration Date</label>
       <input type="date" id="expiration-date" required>
 
       <div class="image-upload">
         <label>Upload Image (Optional)</label>
-        <input type="file" accept="image/*">
+        <input id="image" type="file" accept="image/*">
       </div>
 
       <button class="auth-btn">Submit Deal</button>
