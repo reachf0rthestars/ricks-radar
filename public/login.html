@@ -18,10 +18,12 @@
   <script defer src="firebase-login.js"></script>
 
   <style>
-    /* Login page needs normal flow so menu overlay works */
+    /* Center the login card while keeping menu overlay functional */
     .auth-body {
-      display: block;
-      padding-top: 80px; /* space for fixed top bar */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 120px; /* space for fixed top bar */
       min-height: 100vh;
       background: var(--bg);
     }
