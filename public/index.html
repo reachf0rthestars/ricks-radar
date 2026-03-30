@@ -15,7 +15,7 @@
 
 <body>
 
-  <!-- Overlay for slide-out menu -->
+  <!-- Overlay -->
   <div id="menu-overlay"></div>
 
   <!-- Slide-out Menu -->
@@ -31,6 +31,7 @@
     </ul>
   </nav>
 
+  <!-- Page Container -->
   <div class="page">
 
     <!-- Top Bar -->
@@ -43,7 +44,7 @@
 
       <!-- Logo -->
       <div class="logo-wrap">
-        <img class="logo" src="./images/Horiz-Logo.png" alt="Rick's Radar Logo" width="320" height="140">
+        <img class="logo-img" src="./images/Horiz-Logo.png" alt="Rick's Radar Logo" width="320" height="140">
       </div>
 
       <!-- Filters -->
@@ -77,9 +78,7 @@
       <!-- Deal Card 1 -->
       <article class="deal-card">
         <div class="deal-main">
-          <div class="deal-picture">
-            Picture
-          </div>
+          <div class="deal-picture">Picture</div>
 
           <div class="deal-info">
             <div class="deal-tag">
@@ -112,7 +111,7 @@
         </div>
       </article>
 
-      <!-- Deal Card 2 (Full Width) -->
+      <!-- Deal Card 2 -->
       <article class="deal-card deal-card--secondary">
         <h2 class="deal-title">Second Deal – Full Width Highlight</h2>
 
@@ -140,18 +139,17 @@
     </main>
   </div>
 
-  <!-- Inline Script for Filters -->
+  <!-- Filters + Badges Script -->
   <script>
     // FILTERS
     const filtersContainer = document.querySelector('.filters');
     const mainButton = filtersContainer.querySelector('.pill--primary');
     const filterButtons = filtersContainer.querySelectorAll('button:not(.pill--primary)');
+    const activeFilters = new Set();
 
     mainButton.addEventListener('click', () => {
       filtersContainer.classList.toggle('show-filters');
     });
-
-    const activeFilters = new Set();
 
     filterButtons.forEach(button => {
       button.addEventListener('click', () => {
@@ -187,8 +185,7 @@
     }
 
     // BADGES
-    const badges = document.querySelectorAll('.badge');
-    badges.forEach(badge => {
+    document.querySelectorAll('.badge').forEach(badge => {
       badge.addEventListener('click', () => {
         badge.classList.toggle('active');
       });

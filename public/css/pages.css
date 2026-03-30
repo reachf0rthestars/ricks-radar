@@ -3,24 +3,16 @@
    Page-specific styling
 ------------------------------ */
 
-/* Auth Pages */
+/* ------------------------------
+   AUTH PAGES
+------------------------------ */
 .auth-body {
   background: var(--bg);
+  min-height: 100vh;
+  padding: 4rem 0;
   display: flex;
   justify-content: center;
   align-items: center;
-
-  min-height: 100vh;   /* ✅ allows growth */
-  padding: 4rem 0;     /* ✅ top & bottom spacing */
-}
-.page {
-  width: 100%;
-  max-width: 900px;
-  margin: 80px auto 0; /* pushes content below fixed header */
-  background: #fff;
-  border-radius: 16px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
-  padding: 1.25rem 1.5rem 2rem;
 }
 
 .auth-card {
@@ -85,37 +77,28 @@
   font-weight: 600;
 }
 
-/* Account Page */
+/* Google button layout only */
+.google-btn {
+  margin: 15px auto 0;
+  display: flex;
+  justify-content: center;
+}
+
+/* ------------------------------
+   ACCOUNT PAGE
+------------------------------ */
 .section-title {
   font-size: 1.3rem;
   font-weight: 700;
   margin: 1.5rem 0 1rem;
 }
+
 .auth-form select {
   width: 100%;
   padding: 0.75rem 1rem;
   border-radius: 10px;
   border: 1px solid #ddd;
   font-size: 1rem;
-  font-family: inherit;
   background-color: #fff;
-  appearance: none; /* removes default arrow */
-}
-
-/* Login Page */
-
-.google-btn {
-  margin: 15px auto;
-  display: block;
-  display: flex;
-  justify-content: center;
-   margin-top: 1rem;
-  padding: 0.7rem;
-  border: none;
-  border-radius: 12px;
-  background: var(--blue);
-  color: #fff;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
+  appearance: none;
 }

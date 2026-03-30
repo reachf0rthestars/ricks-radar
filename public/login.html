@@ -3,22 +3,39 @@
 <head>
   <meta charset="UTF-8">
   <title>Login</title>
+
+  <!-- Styles -->
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/components.css">
   <link rel="stylesheet" href="css/pages.css">
+
+  <!-- Menu + UI Script -->
   <script defer src="front.js"></script>
 
   <!-- Firebase SDKs -->
   <script defer src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
   <script defer src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js"></script>
   <script defer src="firebase-login.js"></script>
+
+  <style>
+    /* Center the login card while keeping menu overlay functional */
+    .auth-body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 120px; /* space for fixed top bar */
+      min-height: 100vh;
+      background: var(--bg);
+    }
+  </style>
 </head>
 
 <body class="auth-body">
 
-  <!-- Slide-out Menu -->
+  <!-- Overlay -->
   <div id="menu-overlay"></div>
 
+  <!-- Slide-out Menu -->
   <nav id="side-menu">
     <h2>Menu</h2>
     <ul>
@@ -27,20 +44,20 @@
       <li><a href="account.html">Account</a></li>
       <li><a href="login.html">Login</a></li>
       <li><a href="about.html">About Us</a></li>
+      <li><button id="logout-btn" class="logout-btn">Logout</button></li>
     </ul>
   </nav>
 
   <!-- Top Bar -->
-  <header class="top-bar" style="position:absolute; top:1rem; left:1rem; right:1rem;">
+  <header class="top-bar">
     <button class="top-btn top-btn--secondary" id="menu-btn">☰ Menu</button>
-    <button class="top-btn">Back</button>
   </header>
 
   <!-- Login Card -->
-  <div class="auth-card" style="margin-top:4rem;">
+  <div class="auth-card">
     <h1 class="auth-title">Sign In</h1>
 
-    <button id="google-login" class="auth-btn google-btn" style="background:#026BE3;">
+    <button id="google-login" class="auth-btn google-btn">
       Sign in with Google
     </button>
 
@@ -48,10 +65,9 @@
       You must sign in to add deals or manage your account.
     </p>
 
-    <!-- Create Account Link -->
     <p class="auth-footer">
-      Don't have an account? 
-      <a href="createaccount.html" style="color: var(--blue); font-weight:600;">Create Account</a>
+      Don't have an account?
+      <a href="createaccount.html">Create Account</a>
     </p>
   </div>
 

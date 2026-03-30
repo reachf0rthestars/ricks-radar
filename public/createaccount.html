@@ -3,20 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <title>Create Account & Profile</title>
+
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/components.css">
   <link rel="stylesheet" href="css/pages.css">
+
+  <!-- Firebase -->
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-storage-compat.js"></script>
+
   <style>
     .auth-body {
-      display: flex;
-      justify-content: center;
-      align-items: center;
       min-height: 100vh;
       background: var(--bg);
+      padding-top: 80px;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
     }
 
     .auth-card {
@@ -33,17 +38,22 @@
       margin-bottom: 1rem;
     }
 
+    /* Center the Google button */
+    #google-signup {
+      display: block;
+      margin: 0 auto;
+      width: 100%;
+      text-align: center;
+    }
+
     .auth-form {
       display: flex;
       flex-direction: column;
       gap: 0.75rem;
     }
 
-    .auth-form label {
-      font-weight: 600;
-    }
-
-    .auth-form input, .auth-form textarea {
+    .auth-form input,
+    .auth-form textarea {
       padding: 0.6rem 0.8rem;
       border-radius: 10px;
       border: 1px solid #ccc;
@@ -62,10 +72,6 @@
       cursor: pointer;
     }
 
-    .auth-btn:hover {
-      background: #015ac0;
-    }
-
     .profile-preview {
       display: flex;
       justify-content: center;
@@ -80,27 +86,49 @@
     }
   </style>
 </head>
+
 <body class="auth-body">
 
+  <!-- Overlay -->
+  <div id="menu-overlay"></div>
+
+  <!-- Slide-out Menu -->
+  <nav id="side-menu">
+    <h2>Menu</h2>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="add-deal.html">Add Deal</a></li>
+      <li><a href="account.html">Account</a></li>
+      <li><a href="login.html">Login</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li><button class="logout-btn" id="logout-btn">Logout</button></li>
+    </ul>
+  </nav>
+
+  <!-- Top Bar -->
+  <header class="top-bar">
+    <button class="top-btn top-btn--secondary" id="menu-btn">☰ Menu</button>
+  </header>
+
+  <!-- Auth Card -->
   <div class="auth-card">
     <h1>Create Your Profile</h1>
 
-    <!-- Step 1: Sign in with Google -->
+    <!-- Centered Google Button -->
     <button id="google-signup" class="auth-btn">Sign in with Google</button>
 
-    <!-- Step 2: Profile Setup Form -->
     <form id="profile-form" class="auth-form" style="display:none;">
       <div class="profile-preview">
         <img id="profile-img-preview" src="https://via.placeholder.com/100" alt="Profile Preview">
       </div>
 
-      <label for="username">Username</label>
+      <label>Username</label>
       <input type="text" id="username" placeholder="Choose a username" required>
 
-      <label for="bio">Bio / Description</label>
+      <label>Bio / Description</label>
       <textarea id="bio" rows="3" placeholder="Tell us about yourself..." required></textarea>
 
-      <label for="profileImage">Profile Image (optional)</label>
+      <label>Profile Image (optional)</label>
       <input type="file" id="profileImage" accept="image/*">
 
       <button type="submit" class="auth-btn">Save Profile</button>
@@ -108,9 +136,7 @@
   </div>
 
   <script>
-    // ====================
-    // 1. Firebase Config
-    // ====================
+    // Firebase Config
     const firebaseConfig = {
       apiKey: "YOUR_API_KEY",
       authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
@@ -125,12 +151,9 @@
     const db = firebase.firestore();
     const storage = firebase.storage();
 
-    // ====================
-    // 2. Google Sign-in
-    // ====================
+    // Google Sign-in
     const googleBtn = document.getElementById('google-signup');
     const profileForm = document.getElementById('profile-form');
-
     let currentUser = null;
 
     googleBtn.addEventListener('click', async () => {
@@ -138,19 +161,19 @@
       try {
         const result = await auth.signInWithPopup(provider);
         currentUser = result.user;
+
         googleBtn.style.display = 'none';
         profileForm.style.display = 'flex';
 
-        // Pre-fill profile image preview from Google account
-        document.getElementById('profile-img-preview').src = currentUser.photoURL || 'https://via.placeholder.com/100';
+        document.getElementById('profile-img-preview').src =
+          currentUser.photoURL || 'https://via.placeholder.com/100';
+
       } catch (err) {
         alert(err.message);
       }
     });
 
-    // ====================
-    // 3. Profile Form Submission
-    // ====================
+    // Save Profile
     profileForm.addEventListener('submit', async (e) => {
       e.preventDefault();
 
@@ -160,19 +183,17 @@
 
       let profileImageURL = currentUser.photoURL || '';
 
-      // If user uploaded a custom image, upload to Firebase Storage
       if (file) {
         const storageRef = storage.ref(`profileImages/${currentUser.uid}_${file.name}`);
         await storageRef.put(file);
         profileImageURL = await storageRef.getDownloadURL();
       }
 
-      // Save user data to Firestore
       await db.collection('users').doc(currentUser.uid).set({
-        username: username,
+        username,
         displayName: currentUser.displayName,
         email: currentUser.email,
-        bio: bio,
+        bio,
         profileImage: profileImageURL,
         dealsPosted: 0,
         likes: 0,
@@ -180,8 +201,22 @@
         savedDeals: 0
       });
 
-      alert('Profile saved successfully!');
-      window.location.href = 'account.html'; // redirect to account page
+      window.location.href = 'account.html';
+    });
+
+    // Slide-out Menu Logic
+    const menuBtn = document.getElementById('menu-btn');
+    const sideMenu = document.getElementById('side-menu');
+    const overlay = document.getElementById('menu-overlay');
+
+    menuBtn.addEventListener('click', () => {
+      sideMenu.classList.add('active');
+      overlay.classList.add('active');
+    });
+
+    overlay.addEventListener('click', () => {
+      sideMenu.classList.remove('active');
+      overlay.classList.remove('active');
     });
   </script>
 
