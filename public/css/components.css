@@ -339,20 +339,24 @@
   font-size: 0.85rem;
   opacity: 0.9;
 }
-#side-menu ul li .logout-btn {
-  display: block;
-  width: 100%;
-  padding: 0.75rem 1rem;
+
+/* Logout button that matches menu links exactly */
+#side-menu .logout-btn {
   background: none;
   border: none;
-  text-align: left;
+  padding: 0;
+  margin: 0;
   font-size: 1rem;
+  font-weight: 600;
+  color: var(--blue);
   cursor: pointer;
-  color: inherit; /* same color as links */
+  text-align: left;
+  font-family: inherit;
 }
 
-#side-menu ul li .logout-btn:hover {
-  background: rgba(0, 0, 0, 0.1);
+/* Same hover behavior as your <a> links */
+#side-menu .logout-btn:hover {
+  text-decoration: underline;
 }
 
 /* Mobile */
