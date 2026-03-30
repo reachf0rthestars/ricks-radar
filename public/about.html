@@ -22,6 +22,19 @@
         grid-column: 2/3;
         grid-row: 2/3;
       }
+      #save_button {
+        background-image: linear-gradient(to right, #59c309, #026be3);
+        color: white;
+        padding: 1em;
+        border-radius: 20px;
+        border-color: white;
+        box-shadow: 1px 2px 5px lightgray;
+        margin-top: 2em;
+      }
+      #save_button a {
+        color: white;
+        text-decoration: none;
+      }
     </style>
 </head>
 <body>
@@ -72,8 +85,10 @@
             </p>
           </section>
         </div>
+        <div></div>
+        <div></div>
+        <button id="save_button"><a href="index.html">Start Saving Now</a></button>
       </div>
-      <button><a href="index.html">Start Saving Now</a></button>
       <script>
   const menuBtn = document.getElementById('menu-btn');
   const sideMenu = document.getElementById('side-menu');
