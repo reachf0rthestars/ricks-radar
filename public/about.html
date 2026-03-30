@@ -12,15 +12,30 @@
         display: grid;
         grid-template-columns: 1fr 4fr 1fr;
         grid-template-rows: 1fr 1fr;
-        margin-top: 80px
+        margin-top: 160px;
       }
       #hero-about {
         grid-column: 2/3;
         grid-row: 1/2;
       }
-      #about_contact {
-        grid-column: 2/3;
-        grid-row: 2/3;
+      #about_content {
+        margin-top: -4em;
+      }
+      #about_content section {
+        margin-bottom: 3em;
+      }
+      #save_button {
+        background-image: linear-gradient(to right, #59c309, #026be3);
+        color: white;
+        padding: 1em;
+        border-radius: 20px;
+        border-color: white;
+        box-shadow: 1px 2px 5px lightgray;
+        margin-top: 2em;
+      }
+      #save_button a {
+        color: white;
+        text-decoration: none;
       }
     </style>
 </head>
@@ -72,8 +87,10 @@
             </p>
           </section>
         </div>
+        <div></div>
+        <div></div>
+        <button id="save_button"><a href="index.html">Start Saving Now</a></button>
       </div>
-      <button><a href="index.html">Start Saving Now</a></button>
       <script>
   const menuBtn = document.getElementById('menu-btn');
   const sideMenu = document.getElementById('side-menu');
