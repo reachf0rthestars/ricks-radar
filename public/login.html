@@ -18,12 +18,12 @@
   <script defer src="firebase-login.js"></script>
 
   <style>
-    /* Fix menu layout on auth pages */
+    /* Login page needs normal flow so menu overlay works */
     .auth-body {
-      background: var(--bg);
+      display: block;
+      padding-top: 80px; /* space for fixed top bar */
       min-height: 100vh;
-      padding-top: 80px; /* space for top bar */
-      display: block; /* prevents flex from breaking menu */
+      background: var(--bg);
     }
   </style>
 </head>
@@ -55,7 +55,7 @@
   <div class="auth-card">
     <h1 class="auth-title">Sign In</h1>
 
-    <button id="google-login" class="auth-btn google-btn" style="background:#026BE3;">
+    <button id="google-login" class="auth-btn google-btn">
       Sign in with Google
     </button>
 
@@ -65,7 +65,7 @@
 
     <p class="auth-footer">
       Don't have an account?
-      <a href="createaccount.html" style="color: var(--blue); font-weight:600;">Create Account</a>
+      <a href="createaccount.html">Create Account</a>
     </p>
   </div>
 
