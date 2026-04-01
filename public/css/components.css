@@ -3,33 +3,35 @@
    Reusable UI elements
 ------------------------------ */
 
-/* Top Bar + Buttons */
+/* ------------------------------
+   TOP BAR + BUTTONS
+------------------------------ */
 .top-bar {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%; /* full screen */
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  width: 100%;
   padding: 12px 20px;
   background: white;
   border-bottom: 1px solid #eee;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   z-index: 1000;
 }
 
 .top-btn {
-  border: none;
-  padding: 0.5rem 1.1rem;
-  border-radius: 999px;
-  font-size: 0.9rem;
-  cursor: pointer;
-  font-weight: 600;
-  color: #fff;
   background: var(--blue);
+  color: #fff;
+  border: none;
+  border-radius: 999px;
+  padding: 0.5rem 1.1rem;
+  font-size: 0.9rem;
+  font-weight: 600;
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
+  cursor: pointer;
   box-shadow: 0 3px 8px rgba(2, 107, 227, 0.35);
 }
 
@@ -38,7 +40,76 @@
   box-shadow: 0 3px 8px rgba(89, 195, 9, 0.35);
 }
 
-/* Logo */
+.top-profile-badge {
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 999px;
+  background: #fff;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.3rem 0.62rem 0.3rem 0.3rem;
+  cursor: pointer;
+  max-width: 180px;
+  transition: transform 0.12s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.top-profile-badge:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.top-profile-badge__img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.top-profile-badge__name {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #2a2a2a;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.top-profile-badge--signed-out {
+  background: linear-gradient(135deg, #ffffff, #f4f9ff);
+  border-color: rgba(2, 107, 227, 0.35);
+  padding: 0.45rem 0.9rem;
+  box-shadow: 0 4px 14px rgba(2, 107, 227, 0.18);
+}
+
+.top-profile-badge--signed-out .top-profile-badge__img {
+  display: none;
+}
+
+.top-profile-badge--signed-out .top-profile-badge__name {
+  color: var(--blue);
+  font-size: 0.86rem;
+  letter-spacing: 0.01em;
+}
+
+.top-profile-badge--logout {
+  background: #fff5f5;
+  border-color: rgba(191, 47, 47, 0.35);
+  padding: 0.45rem 0.9rem;
+  box-shadow: 0 4px 14px rgba(191, 47, 47, 0.13);
+}
+
+.top-profile-badge--logout .top-profile-badge__img {
+  display: none;
+}
+
+.top-profile-badge--logout .top-profile-badge__name {
+  color: #a12a2a;
+  font-size: 0.86rem;
+}
+
+/* ------------------------------
+   LOGO
+------------------------------ */
 .logo-wrap {
   display: flex;
   justify-content: center;
@@ -49,7 +120,9 @@
   object-fit: contain;
 }
 
-/* Filters / Pills */
+/* ------------------------------
+   FILTERS / PILLS
+------------------------------ */
 .filters {
   display: flex;
   flex-wrap: wrap;
@@ -58,11 +131,11 @@
 }
 
 .pill {
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.08);
   border-radius: 999px;
   padding: 0.4rem 0.9rem;
   font-size: 0.85rem;
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  background: #fff;
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
@@ -82,26 +155,16 @@
   filter: brightness(0.9);
 }
 
-.pill span.dot{
+.pill span.dot {
   width: 8px;
   height: 8px;
   border-radius: 50%;
 }
-.food span.dot {
-  background: var(--green);
-}
 
-.groceries span.dot {
-  background: var(--blue);
-}
-
-.services span.dot {
-  background: var(--orange);
-}
-
-.other span.dot {
-  background: var(--grey);
-}
+.food span.dot { background: var(--green); }
+.groceries span.dot { background: var(--blue); }
+.services span.dot { background: var(--orange); }
+.other span.dot { background: var(--grey); }
 
 .pill--primary {
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
@@ -150,7 +213,43 @@
   color: white;
 }
 
-/* Deal Cards */
+/* Tags */
+.category {
+  border-radius: 999px;
+  padding: 0.4rem 0.9rem;
+  font-size: 0.85rem;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  background: #fff;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  cursor: pointer;
+  transition: background 0.15s, transform 0.1s, box-shadow 0.15s;
+}
+
+.food_tag {
+  background: var(--green);
+  color: white;
+}
+
+.groceries_tag {
+  background: var(--blue);
+  color: white;
+}
+
+.services_tag {
+  background: var(--orange);
+  color: white;
+}
+
+.other_tag {
+  background: var(--grey);
+  color: white;
+}
+
+/* ------------------------------
+   DEAL CARDS
+------------------------------ */
 .deals {
   display: flex;
   flex-direction: column;
@@ -158,9 +257,9 @@
 }
 
 .deal-card {
-  border-radius: 14px;
-  border: 3px solid rgba(0, 0, 0, 0.06);
   background: #fff;
+  border: 3px solid rgba(0, 0, 0, 0.06);
+  border-radius: 14px;
   padding: 1rem;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
 }
@@ -173,14 +272,14 @@
 }
 
 .deal-picture {
-  border-radius: 12px;
   background: linear-gradient(135deg, var(--blue), var(--green));
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  border-radius: 12px;
   color: #fff;
   font-weight: 600;
   font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .deal-info {
@@ -190,82 +289,75 @@
 }
 
 .deal-tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  padding: 0.25rem 0.6rem;
-  border-radius: 999px;
   background: rgba(2, 107, 227, 0.08);
   color: var(--blue);
+  border-radius: 999px;
+  padding: 0.25rem 0.6rem;
   font-size: 0.75rem;
   font-weight: 600;
-  width: fit-content;
+  display: inline-flex;
+  gap: 0.35rem;
 }
 
 .deal-title {
-  font-weight: 700;
   font-size: 1.05rem;
+  font-weight: 700;
 }
 
 .deal-meta {
+  border:none;
   display: flex;
   flex-wrap: wrap;
   gap: 0.6rem;
   font-size: 0.8rem;
   color: #555;
 }
-
 .badge {
+  border: 1px solid transparent; /* prevents layout shift */
+}
+
+.badge:focus {
+  outline: none;                 /* remove default black outline */
+  border-color: #ccc;            /* light gray border */
+}
+.badge {
+  background: rgba(0, 0, 0, 0.04);
+  border-radius: 999px;
+  padding: 0.2rem 0.55rem;
   display: inline-flex;
   align-items: center;
   gap: 0.25rem;
-  padding: 0.2rem 0.55rem;
-  border-radius: 999px;
-  background: rgba(0, 0, 0, 0.04);
 }
 
 .badge--likes {
   background: rgba(89, 195, 9, 0.12);
   color: var(--green);
-  border: none;
 }
 
 .badge--dislikes {
   background: rgba(2, 107, 227, 0.08);
   color: var(--blue);
-  border: none;
 }
 
-/* Active (toggled) state */
-.badge.active {
-  color: #fff;
-}
-
-/* Specific active backgrounds using existing colors */
-.badge--likes.active {
-  background: var(--green);
-}
-
-.badge--dislikes.active {
-  background: var(--blue);
-}
-
+.badge.active { color: #fff; }
+.badge--likes.active { background: var(--green); }
+.badge--dislikes.active { background: var(--blue); }
 
 .deal-details {
-  border-radius: 10px;
   background: rgba(0, 0, 0, 0.02);
+  border-radius: 10px;
   padding: 0.7rem 0.8rem;
   font-size: 0.85rem;
   display: grid;
   gap: 0.25rem;
 }
 
-.deal-details span.label {
+.deal-details .label {
   font-weight: 600;
   color: #444;
 }
 
-/* Secondary Deal Card */
+/* Secondary Card */
 .deal-card--secondary {
   background: linear-gradient(135deg, #fff, #fff9d9);
   border: 1px solid rgba(255, 239, 94, 0.7);
@@ -275,7 +367,9 @@
   background: rgba(255, 239, 94, 0.18);
 }
 
-/* Slide-out Menu */
+/* ------------------------------
+   SLIDE-OUT MENU
+------------------------------ */
 #side-menu {
   position: fixed;
   top: 0;
@@ -283,16 +377,16 @@
   width: 260px;
   height: 100vh;
   background: #fff;
-  box-shadow: 4px 0 20px rgba(0,0,0,0.15);
   padding: 1.5rem;
+  box-shadow: 4px 0 20px rgba(0,0,0,0.15);
   transition: left 0.25s ease;
   z-index: 2000;
 }
 
 #side-menu h2 {
-  margin-bottom: 1rem;
   font-size: 1.3rem;
   font-weight: 700;
+  margin-bottom: 1rem;
 }
 
 #side-menu ul {
@@ -303,10 +397,27 @@
 }
 
 #side-menu a {
-  text-decoration: none;
   color: var(--blue);
   font-size: 1rem;
   font-weight: 600;
+  text-decoration: none;
+}
+
+/* Logout button styled like links */
+#side-menu .logout-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  color: var(--blue);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: left;
+}
+
+#side-menu .logout-btn:hover {
+  text-decoration: underline;
 }
 
 /* Overlay */
@@ -321,9 +432,14 @@
 }
 
 #side-menu.active { left: 0; }
-#menu-overlay.active { opacity: 1; pointer-events: auto; }
+#menu-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+/* ------------------------------
+   PROFILE COMPONENTS
+------------------------------ */
 
-/* Profile Components */
 .profile-header {
   text-align: center;
   padding: 2.5rem 1rem;
@@ -374,12 +490,67 @@
   opacity: 0.9;
 }
 
+.profile-edit-toggle {
+  margin-top: 0.8rem;
+}
 
-/* Mobile */
+.profile-edit-form {
+  margin-top: 1rem;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  border-radius: 12px;
+  padding: 1rem;
+  text-align: left;
+  display: grid;
+  gap: 0.45rem;
+  max-width: 440px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.profile-edit-form label {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.profile-edit-form textarea,
+.profile-edit-form input[type="file"] {
+  border: none;
+  border-radius: 10px;
+  padding: 0.55rem 0.7rem;
+}
+
+.profile-edit-actions {
+  margin-top: 0.4rem;
+  display: flex;
+  gap: 0.55rem;
+  flex-wrap: wrap;
+}
+
+.profile-edit-message {
+  min-height: 1.2rem;
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+/* ------------------------------
+   MOBILE
+------------------------------ */
 @media (max-width: 640px) {
   .deal-main {
     grid-template-columns: 1fr;
   }
-} 
 
+  .top-profile-badge {
+    max-width: 130px;
+  }
 
+  .top-profile-badge__name {
+    display: none;
+  }
+
+  .top-profile-badge--signed-out .top-profile-badge__name,
+  .top-profile-badge--logout .top-profile-badge__name {
+    display: inline;
+  }
+}

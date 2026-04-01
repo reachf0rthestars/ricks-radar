@@ -10,12 +10,12 @@
   <link rel="stylesheet" href="css/pages.css">
 
   <!-- Scripts -->
-  <script defer src="front.js"></script>
+  <script type="module" src="backend/pages/index-page.js"></script>
 </head>
 
 <body>
 
-  <!-- Overlay for slide-out menu -->
+  <!-- Overlay -->
   <div id="menu-overlay"></div>
 
   <!-- Slide-out Menu -->
@@ -31,6 +31,7 @@
     </ul>
   </nav>
 
+  <!-- Page Container -->
   <div class="page">
 
     <!-- Top Bar -->
@@ -43,7 +44,7 @@
 
       <!-- Logo -->
       <div class="logo-wrap">
-        <img class="logo" src="./images/Horiz-Logo.png" alt="Rick's Radar Logo" width="320" height="140">
+        <img class="logo-img" src="./images/Horiz-Logo.png" alt="Rick's Radar Logo" width="320" height="140">
       </div>
 
       <!-- Filters -->
@@ -77,9 +78,7 @@
       <!-- Deal Card 1 -->
       <article class="deal-card">
         <div class="deal-main">
-          <div class="deal-picture">
-            Picture
-          </div>
+          <div class="deal-picture">Picture</div>
 
           <div class="deal-info">
             <div class="deal-tag">
@@ -115,7 +114,7 @@
         </div>
       </article>
 
-      <!-- Deal Card 2 (Full Width) -->
+      <!-- Deal Card 2 -->
       <article class="deal-card deal-card--secondary">
         <h2 class="deal-title">Second Deal – Full Width Highlight</h2>
 
@@ -146,61 +145,6 @@
 
     </main>
   </div>
-
-  <!-- Inline Script for Filters -->
-  <script>
-    // FILTERS
-    const filtersContainer = document.querySelector('.filters');
-    const mainButton = filtersContainer.querySelector('.pill--primary');
-    const filterButtons = filtersContainer.querySelectorAll('button:not(.pill--primary)');
-
-    mainButton.addEventListener('click', () => {
-      filtersContainer.classList.toggle('show-filters');
-    });
-
-    const activeFilters = new Set();
-
-    filterButtons.forEach(button => {
-      button.addEventListener('click', () => {
-        const filterClass = [...button.classList].find(cls => cls !== 'pill');
-
-        if (activeFilters.has(filterClass)) {
-          activeFilters.delete(filterClass);
-          button.classList.remove('active');
-        } else {
-          activeFilters.add(filterClass);
-          button.classList.add('active');
-        }
-
-        applyFilters();
-      });
-    });
-
-    function applyFilters() {
-      const cards = document.querySelectorAll('.deal-card');
-
-      cards.forEach(card => {
-        if (activeFilters.size === 0) {
-          card.style.display = '';
-          return;
-        }
-
-        const hasMatch = [...activeFilters].some(filter =>
-          card.querySelector(`.${filter}`)
-        );
-
-        card.style.display = hasMatch ? '' : 'none';
-      });
-    }
-
-    // BADGES
-    const badges = document.querySelectorAll('.badge');
-    badges.forEach(badge => {
-      badge.addEventListener('click', () => {
-        badge.classList.toggle('active');
-      });
-    });
-  </script>
 
 </body>
 </html>
