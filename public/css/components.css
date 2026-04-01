@@ -161,10 +161,21 @@
   border-radius: 50%;
 }
 
-.food span.dot { background: var(--green); }
-.groceries span.dot { background: var(--blue); }
-.services span.dot { background: var(--orange); }
-.other span.dot { background: var(--grey); }
+.food span.dot { 
+  background: var(--green); 
+}
+
+.groceries span.dot { 
+  background: var(--blue); 
+}
+
+.services span.dot { 
+  background: var(--orange); 
+}
+
+.other span.dot { 
+  background: var(--grey); 
+}
 
 .pill--primary {
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
