@@ -174,4 +174,4 @@ onAuthStateChanged(auth, async (user) => {
 
 document.body.style.visibility = "hidden";
 setEditFormVisibility(false);
-initSideMenu();
+initSideMenu({ topRightMode: "logout" });

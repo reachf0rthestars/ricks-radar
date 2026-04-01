@@ -63,24 +63,36 @@ function ensureProfileBadge() {
   badge.type = "button";
   badge.className = "top-profile-badge";
   badge.innerHTML = `
-    <img class="top-profile-badge__img" alt="Profile" src="${DEFAULT_AVATAR}">
-    <span class="top-profile-badge__name">Sign In</span>
+    <img class="top-profile-badge__img" alt="Profile">
+    <span class="top-profile-badge__name"></span>
   `;
   topBar.appendChild(badge);
   return badge;
 }
 
-function updateProfileBadge(badge, user, profile) {
+function updateTopRightAction(badge, user, profile, topRightMode) {
   if (!badge) {
     return;
   }
 
   const img = badge.querySelector(".top-profile-badge__img");
   const name = badge.querySelector(".top-profile-badge__name");
+  const isSignedIn = Boolean(user);
+  const isLogoutMode = topRightMode === "logout";
 
-  if (!user) {
-    img.src = DEFAULT_AVATAR;
+  badge.classList.remove("top-profile-badge--signed-out", "top-profile-badge--logout");
+
+  if (!isSignedIn) {
+    badge.classList.add("top-profile-badge--signed-out");
+    img.removeAttribute("src");
     name.textContent = "Sign In";
+    return;
+  }
+
+  if (isLogoutMode) {
+    badge.classList.add("top-profile-badge--logout");
+    img.removeAttribute("src");
+    name.textContent = "Log Out";
     return;
   }
 
@@ -107,7 +119,8 @@ function initLogout() {
 export function initSideMenu({
   menuButtonSelector = "#menu-btn",
   sideMenuSelector = "#side-menu",
-  overlaySelector = "#menu-overlay"
+  overlaySelector = "#menu-overlay",
+  topRightMode = "profile"
 } = {}) {
   const menuButton = getElement(menuButtonSelector) || getElement(".top-btn--secondary");
   const sideMenu = getElement(sideMenuSelector);
@@ -141,7 +154,23 @@ export function initSideMenu({
 
   if (profileBadge) {
     profileBadge.addEventListener("click", () => {
-      window.location.href = auth.currentUser ? "account.html" : "login.html";
+      if (!auth.currentUser) {
+        window.location.href = "login.html";
+        return;
+      }
+
+      if (topRightMode === "logout") {
+        signOut(auth)
+          .then(() => {
+            window.location.href = "login.html";
+          })
+          .catch((error) => {
+            console.error("Unable to sign out.", error);
+          });
+        return;
+      }
+
+      window.location.href = "account.html";
     });
   }
 
@@ -151,12 +180,12 @@ export function initSideMenu({
     activeUser = user;
     activeProfile = profile;
     setMenuAuthVisibility(Boolean(user));
-    updateProfileBadge(profileBadge, user, profile);
+    updateTopRightAction(profileBadge, user, profile, topRightMode);
   });
 
   document.addEventListener(PROFILE_UPDATED_EVENT, (event) => {
     activeProfile = event.detail?.profile || activeProfile;
-    updateProfileBadge(profileBadge, activeUser, activeProfile);
+    updateTopRightAction(profileBadge, activeUser, activeProfile, topRightMode);
   });
 
   initLogout();
