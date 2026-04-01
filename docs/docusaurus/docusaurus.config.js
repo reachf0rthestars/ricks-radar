@@ -25,7 +25,7 @@ const config = {
         docs: {
           sidebarPath: './sidebars.js',
           editUrl:
-            'https://github.com/reachf0rthestars/ricks-radar/edit/docs/docs/docusaurus/',
+            'https://github.com/reachf0rthestars/ricks-radar/edit/main/docs/docusaurus/',
         },
         blog: false,
         theme: {
