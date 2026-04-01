@@ -19,10 +19,18 @@ New contributors need a fast map before touching code.
 - `public/`: live site HTML/CSS/JS.
 - `public/backend/pages/`: one controller module per page.
 - `public/backend/shared/`: shared UI and profile utilities.
-- `public/backend/deals-service.js`: deal data and image upload service.
-- `firebase.json`, `.firebaserc`, `firestore.rules`, `storage.rules`: Firebase configuration and security.
+- `public/backend/deals-service.js`: placeholder for future deal service work.
+- `public/backend/voting-service.js`: placeholder for future voting persistence.
+- `firebase.json`, `.firebaserc`: Firebase hosting configuration currently present in this repo.
 - `.github/workflows/`: CI/CD pipelines.
 - `docs/docusaurus/`: this documentation site.
+- `frontend/`, `backend/`, and `submission/`: present in the repo, but not the active browser app documented in these pages.
+
+## Best Starting Points
+- [System Overview](./02-system-overview)
+- [Page Deep Dives](./08-page-deep-dives)
+- [HTML-to-JS DOM Contracts](./14-html-js-dom-contracts)
+- Reference pages under `Reference` in the sidebar
 
 ## Annotated Snippet
 ```json
@@ -39,6 +47,7 @@ New contributors need a fast map before touching code.
 ## Common Mistakes
 - Editing `frontend/` assuming it is the active site path.
 - Changing rules without documenting the change in docs.
+- Treating placeholder service files as production-ready APIs.
 
 ## Official Docs Links
 - Firebase CLI config: https://firebase.google.com/docs/cli#the_firebasejson_file

@@ -18,12 +18,18 @@ Most problems are configuration or rules mismatches. This page shortens debuggin
 ## How It Works Here
 ### Expected behavior to document clearly
 - `firebase-config.js` runs a Firestore test read on import.
-- `connection_test` read requires authentication.
-- `users` reads are owner-only.
-- `deals` updates are owner-only.
-- `deals` reads require authenticated user.
+- `connection_test` read may fail because the collection does not exist or current rules reject it.
 - Homepage cards are currently static HTML, not Firestore queries.
+- `add-deal.html` currently has no persistence logic.
 - `voting-service.js` is currently empty.
+
+### Real failure patterns in this codebase
+- Missing DOM ids or classes break page controllers because selectors are hard-coded.
+- Auth observers can redirect unexpectedly when `users/{uid}` documents are missing.
+- Username collisions surface as `USERNAME_TAKEN` in the create-account transaction.
+- Profile image upload can fail before the Firestore write, leaving the profile unchanged.
+- `account.html` hides the body before auth resolves, so load failures can look like a blank page.
+- `firebase-config.js` logs startup failures from module load, which can be noisy even when other parts of the page work.
 
 ### Fast checks
 1. Confirm auth state in browser.
@@ -44,6 +50,8 @@ await getDocs(testQuery);
 - Treating expected permission errors as random failures.
 - Testing only in production instead of emulator first.
 - Leaving outdated docs after changing rules fields.
+- Renaming ids such as `#google-login`, `#google-signup`, `#profile-form`, or `#expiration-date` without updating JavaScript.
+- Assuming a file name like `deals-service.js` means the feature is implemented today.
 
 ## Official Docs Links
 - Firestore rules simulator: https://firebase.google.com/docs/rules/simulator

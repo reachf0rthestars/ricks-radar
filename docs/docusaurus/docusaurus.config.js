@@ -34,6 +34,21 @@ const config = {
       }),
     ],
   ],
+  themes: [
+    [
+      require.resolve("@easyops-cn/docusaurus-search-local"),
+      {
+        indexDocs: true,
+        indexBlog: false,
+        indexPages: false,
+        docsRouteBasePath: "docs",
+        hashed: "query",
+        highlightSearchTermsOnTargetPage: true,
+        explicitSearchResultPath: true,
+        searchBarPosition: "right",
+      },
+    ],
+  ],
   themeConfig:
     ({
       image: 'img/ricks-radar-logo.png',
