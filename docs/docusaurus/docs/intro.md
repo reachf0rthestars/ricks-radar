@@ -18,7 +18,15 @@ The app has multiple moving parts: static pages, browser JavaScript modules, Fir
 ## How To Use This Site
 1. Read in order from glossary to troubleshooting.
 2. Open code and docs side-by-side.
-3. Use the playbook at the end to keep docs current as code changes.
+3. Use the search bar to jump directly to modules, selectors, and functions.
+4. Use the playbook at the end to keep docs current as code changes.
+
+## Documentation Layers
+- Conceptual guides explain the architecture and major workflows.
+- Reference pages document implemented modules, helpers, event flows, and side effects.
+- Contract pages explain the exact ids and classes the JavaScript expects in the HTML.
+
+Start with [How to Use These Docs](./13-how-to-use-these-docs) if you want the fastest route to the right section.
 
 ## Annotated Snippet
 ```html
