@@ -10,13 +10,7 @@
   <link rel="stylesheet" href="css/components.css">
   <link rel="stylesheet" href="css/pages.css">
 
-  <!-- Menu + UI Script -->
-  <script defer src="front.js"></script>
-
-  <!-- Firebase SDKs -->
-  <script defer src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
-  <script defer src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js"></script>
-  <script defer src="firebase-login.js"></script>
+  <script type="module" src="backend/pages/login-page.js"></script>
 
   <style>
     /* Center the login card while keeping menu overlay functional */
@@ -66,10 +60,7 @@
       You must sign in to add deals or manage your account.
     </p>
 
-    <p class="auth-footer">
-      Don't have an account?
-      <a href="createaccount.html">Create Account</a>
-    </p>
+    <p id="login-message" class="auth-footer" aria-live="polite"></p>
   </div>
 
 </body>

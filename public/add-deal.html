@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/components.css">
   <link rel="stylesheet" href="css/pages.css">
+  <script type="module" src="backend/pages/add-deal-page.js"></script>
   <style>
    /* Categories Section */
 .categories {
@@ -121,47 +122,6 @@
       <button class="auth-btn">Submit Deal</button>
     </form>
   </div>
-
-  <script>
-    // Slide-out menu toggle
-    const menuBtn = document.querySelector('.top-btn--secondary');
-    const sideMenu = document.getElementById('side-menu');
-    const overlay = document.getElementById('menu-overlay');
-
-    menuBtn.addEventListener('click', () => {
-      sideMenu.classList.add('active');
-      overlay.classList.add('active');
-    });
-
-    overlay.addEventListener('click', () => {
-      sideMenu.classList.remove('active');
-      overlay.classList.remove('active');
-    });
-
-    // Categories multi-select
-    const categoryButtons = document.querySelectorAll('.categories .category');
-    const hiddenInput = document.getElementById('selected-categories');
-    let selected = [];
-
-    categoryButtons.forEach(btn => {
-      btn.addEventListener('click', () => {
-        const value = btn.dataset.value;
-        if (selected.includes(value)) {
-          selected = selected.filter(v => v !== value);
-          btn.classList.remove('active');
-        } else {
-          selected.push(value);
-          btn.classList.add('active');
-        }
-        hiddenInput.value = selected.join(',');
-      });
-    });
-
-    // Expiration date: prevent past dates
-    const dateInput = document.getElementById('expiration-date');
-    const today = new Date().toISOString().split('T')[0];
-    dateInput.min = today;
-  </script>
 
 </body>
 </html>
