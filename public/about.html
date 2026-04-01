@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="css/components.css">
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/pages.css">
+    <script type="module" src="backend/pages/about-page.js"></script>
     <style>
       #body-about {
         display: grid;
@@ -41,6 +42,7 @@
 </head>
 <body>
     <main>
+      <div id="menu-overlay"></div>
       <nav id="side-menu">
     <h2>Menu</h2>
     <ul>
@@ -94,28 +96,6 @@
         <div></div>
         <button id="save_button"><a href="index.html">Start Saving Now</a></button>
       </div>
-      <script>
-  const menuBtn = document.getElementById('menu-btn');
-  const sideMenu = document.getElementById('side-menu');
-  const menuOverlay = document.createElement('div');
-
-  // Add an overlay to cover rest of the screen when menu is open
-  menuOverlay.id = 'menu-overlay';
-  document.body.appendChild(menuOverlay);
-
-  // Toggle menu visibility
-  menuBtn.addEventListener('click', () => {
-    sideMenu.classList.toggle('active');
-    menuOverlay.classList.toggle('active');
-  });
-
-  // Clicking the overlay closes the menu
-  menuOverlay.addEventListener('click', () => {
-    sideMenu.classList.remove('active');
-    menuOverlay.classList.remove('active');
-  });
-</script>
-
 <style>
   /* Hide side menu and overlay by default */
   #side-menu {
