@@ -40,6 +40,73 @@
   box-shadow: 0 3px 8px rgba(89, 195, 9, 0.35);
 }
 
+.top-profile-badge {
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 999px;
+  background: #fff;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.3rem 0.62rem 0.3rem 0.3rem;
+  cursor: pointer;
+  max-width: 180px;
+  transition: transform 0.12s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.top-profile-badge:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.top-profile-badge__img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.top-profile-badge__name {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #2a2a2a;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.top-profile-badge--signed-out {
+  background: linear-gradient(135deg, #ffffff, #f4f9ff);
+  border-color: rgba(2, 107, 227, 0.35);
+  padding: 0.45rem 0.9rem;
+  box-shadow: 0 4px 14px rgba(2, 107, 227, 0.18);
+}
+
+.top-profile-badge--signed-out .top-profile-badge__img {
+  display: none;
+}
+
+.top-profile-badge--signed-out .top-profile-badge__name {
+  color: var(--blue);
+  font-size: 0.86rem;
+  letter-spacing: 0.01em;
+}
+
+.top-profile-badge--logout {
+  background: #fff5f5;
+  border-color: rgba(191, 47, 47, 0.35);
+  padding: 0.45rem 0.9rem;
+  box-shadow: 0 4px 14px rgba(191, 47, 47, 0.13);
+}
+
+.top-profile-badge--logout .top-profile-badge__img {
+  display: none;
+}
+
+.top-profile-badge--logout .top-profile-badge__name {
+  color: #a12a2a;
+  font-size: 0.86rem;
+}
+
 /* ------------------------------
    LOGO
 ------------------------------ */
@@ -355,11 +422,67 @@
   opacity: 0.9;
 }
 
+.profile-edit-toggle {
+  margin-top: 0.8rem;
+}
+
+.profile-edit-form {
+  margin-top: 1rem;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  border-radius: 12px;
+  padding: 1rem;
+  text-align: left;
+  display: grid;
+  gap: 0.45rem;
+  max-width: 440px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.profile-edit-form label {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.profile-edit-form textarea,
+.profile-edit-form input[type="file"] {
+  border: none;
+  border-radius: 10px;
+  padding: 0.55rem 0.7rem;
+}
+
+.profile-edit-actions {
+  margin-top: 0.4rem;
+  display: flex;
+  gap: 0.55rem;
+  flex-wrap: wrap;
+}
+
+.profile-edit-message {
+  min-height: 1.2rem;
+  margin: 0;
+  font-size: 0.9rem;
+}
+
 /* ------------------------------
    MOBILE
 ------------------------------ */
 @media (max-width: 640px) {
   .deal-main {
     grid-template-columns: 1fr;
+  }
+
+  .top-profile-badge {
+    max-width: 130px;
+  }
+
+  .top-profile-badge__name {
+    display: none;
+  }
+
+  .top-profile-badge--signed-out .top-profile-badge__name,
+  .top-profile-badge--logout .top-profile-badge__name {
+    display: inline;
   }
 }

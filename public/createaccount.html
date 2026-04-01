@@ -7,12 +7,7 @@
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/components.css">
   <link rel="stylesheet" href="css/pages.css">
-
-  <!-- Firebase -->
-  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-storage-compat.js"></script>
+  <script type="module" src="backend/pages/create-account-page.js"></script>
 
   <style>
     .auth-body {
@@ -84,6 +79,13 @@
       border-radius: 50%;
       object-fit: cover;
     }
+
+    .auth-message {
+      margin-top: 0.9rem;
+      min-height: 1.1rem;
+      font-size: 0.95rem;
+      text-align: center;
+    }
   </style>
 </head>
 
@@ -133,92 +135,9 @@
 
       <button type="submit" class="auth-btn">Save Profile</button>
     </form>
+
+    <p id="auth-message" class="auth-message" aria-live="polite"></p>
   </div>
-
-  <script>
-    // Firebase Config
-    const firebaseConfig = {
-      apiKey: "YOUR_API_KEY",
-      authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-      projectId: "YOUR_PROJECT_ID",
-      storageBucket: "YOUR_PROJECT_ID.appspot.com",
-      messagingSenderId: "YOUR_SENDER_ID",
-      appId: "YOUR_APP_ID"
-    };
-
-    firebase.initializeApp(firebaseConfig);
-    const auth = firebase.auth();
-    const db = firebase.firestore();
-    const storage = firebase.storage();
-
-    // Google Sign-in
-    const googleBtn = document.getElementById('google-signup');
-    const profileForm = document.getElementById('profile-form');
-    let currentUser = null;
-
-    googleBtn.addEventListener('click', async () => {
-      const provider = new firebase.auth.GoogleAuthProvider();
-      try {
-        const result = await auth.signInWithPopup(provider);
-        currentUser = result.user;
-
-        googleBtn.style.display = 'none';
-        profileForm.style.display = 'flex';
-
-        document.getElementById('profile-img-preview').src =
-          currentUser.photoURL || 'https://via.placeholder.com/100';
-
-      } catch (err) {
-        alert(err.message);
-      }
-    });
-
-    // Save Profile
-    profileForm.addEventListener('submit', async (e) => {
-      e.preventDefault();
-
-      const username = document.getElementById('username').value.trim();
-      const bio = document.getElementById('bio').value.trim();
-      const file = document.getElementById('profileImage').files[0];
-
-      let profileImageURL = currentUser.photoURL || '';
-
-      if (file) {
-        const storageRef = storage.ref(`profileImages/${currentUser.uid}_${file.name}`);
-        await storageRef.put(file);
-        profileImageURL = await storageRef.getDownloadURL();
-      }
-
-      await db.collection('users').doc(currentUser.uid).set({
-        username,
-        displayName: currentUser.displayName,
-        email: currentUser.email,
-        bio,
-        profileImage: profileImageURL,
-        dealsPosted: 0,
-        likes: 0,
-        followers: 0,
-        savedDeals: 0
-      });
-
-      window.location.href = 'account.html';
-    });
-
-    // Slide-out Menu Logic
-    const menuBtn = document.getElementById('menu-btn');
-    const sideMenu = document.getElementById('side-menu');
-    const overlay = document.getElementById('menu-overlay');
-
-    menuBtn.addEventListener('click', () => {
-      sideMenu.classList.add('active');
-      overlay.classList.add('active');
-    });
-
-    overlay.addEventListener('click', () => {
-      sideMenu.classList.remove('active');
-      overlay.classList.remove('active');
-    });
-  </script>
 
 </body>
 </html>

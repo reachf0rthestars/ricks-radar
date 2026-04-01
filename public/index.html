@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="css/pages.css">
 
   <!-- Scripts -->
-  <script defer src="front.js"></script>
+  <script type="module" src="backend/pages/index-page.js"></script>
 </head>
 
 <body>
@@ -138,59 +138,6 @@
 
     </main>
   </div>
-
-  <!-- Filters + Badges Script -->
-  <script>
-    // FILTERS
-    const filtersContainer = document.querySelector('.filters');
-    const mainButton = filtersContainer.querySelector('.pill--primary');
-    const filterButtons = filtersContainer.querySelectorAll('button:not(.pill--primary)');
-    const activeFilters = new Set();
-
-    mainButton.addEventListener('click', () => {
-      filtersContainer.classList.toggle('show-filters');
-    });
-
-    filterButtons.forEach(button => {
-      button.addEventListener('click', () => {
-        const filterClass = [...button.classList].find(cls => cls !== 'pill');
-
-        if (activeFilters.has(filterClass)) {
-          activeFilters.delete(filterClass);
-          button.classList.remove('active');
-        } else {
-          activeFilters.add(filterClass);
-          button.classList.add('active');
-        }
-
-        applyFilters();
-      });
-    });
-
-    function applyFilters() {
-      const cards = document.querySelectorAll('.deal-card');
-
-      cards.forEach(card => {
-        if (activeFilters.size === 0) {
-          card.style.display = '';
-          return;
-        }
-
-        const hasMatch = [...activeFilters].some(filter =>
-          card.querySelector(`.${filter}`)
-        );
-
-        card.style.display = hasMatch ? '' : 'none';
-      });
-    }
-
-    // BADGES
-    document.querySelectorAll('.badge').forEach(badge => {
-      badge.addEventListener('click', () => {
-        badge.classList.toggle('active');
-      });
-    });
-  </script>
 
 </body>
 </html>

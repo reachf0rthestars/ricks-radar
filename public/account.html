@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="css/pages.css">
 
   <!-- Scripts -->
-  <script defer src="front.js"></script>
+  <script type="module" src="backend/pages/account-page.js"></script>
 </head>
 
 <body>
@@ -45,6 +45,22 @@
 
       <h2 class="profile-name">NAME</h2>
       <p class="profile-bio">Local foodie. Deal hunter. Always exploring Rexburg eats.</p>
+      <button id="edit-profile-btn" class="top-btn top-btn--secondary profile-edit-toggle">Edit Profile</button>
+
+      <form id="edit-profile-form" class="profile-edit-form" style="display:none;">
+        <label for="edit-bio">Update Bio</label>
+        <textarea id="edit-bio" rows="3" placeholder="Tell us about yourself..."></textarea>
+
+        <label for="edit-profile-image">Update Profile Picture</label>
+        <input id="edit-profile-image" type="file" accept="image/*">
+
+        <div class="profile-edit-actions">
+          <button id="save-profile-btn" type="submit" class="top-btn">Save Changes</button>
+          <button id="cancel-profile-btn" type="button" class="top-btn top-btn--secondary">Cancel</button>
+        </div>
+
+        <p id="edit-profile-message" class="profile-edit-message" aria-live="polite"></p>
+      </form>
 
       <div class="profile-stats">
         <div>
