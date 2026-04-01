@@ -1,7 +1,8 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-app.js";
-import { getAuth } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-auth.js";
-import { getStorage } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-storage.js";
+import { connectAuthEmulator, getAuth } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-auth.js";
+import { connectStorageEmulator, getStorage } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-storage.js";
 import { 
+  connectFirestoreEmulator,
   getFirestore, 
   collection, 
   query, 
@@ -23,6 +24,17 @@ const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
 export const auth = getAuth(app);
 export const storage = getStorage(app);
+
+const isLocalHost =
+  window.location.hostname === "localhost" ||
+  window.location.hostname === "127.0.0.1";
+
+if (isLocalHost) {
+  connectAuthEmulator(auth, "http://127.0.0.1:9099", { disableWarnings: true });
+  connectFirestoreEmulator(db, "127.0.0.1", 8080);
+  connectStorageEmulator(storage, "127.0.0.1", 9199);
+  console.log("Using Firebase emulators: Auth(9099), Firestore(8080), Storage(9199).");
+}
 
 // 2. Test the connection
 async function testFirebaseConfig() {

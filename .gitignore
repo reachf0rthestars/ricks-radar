@@ -67,3 +67,10 @@ node_modules/
 
 # dataconnect generated files
 .dataconnect
+
+# Codex / agent local tooling
+.codex/
+.agents/
+skills-lock.json
+
+.firestore-rules-findings.local.md

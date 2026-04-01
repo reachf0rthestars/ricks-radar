@@ -1,6 +1,7 @@
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-auth.js";
 import { doc, getDoc, serverTimestamp, updateDoc } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-firestore.js";
 import { getDownloadURL, ref, uploadBytes } from "https://www.gstatic.com/firebasejs/12.11.0/firebase-storage.js";
+import { getDealsByUser } from "../deals-service.js";
 import { auth, db, storage } from "../firebase-config.js";
 import {
   DEFAULT_AVATAR,
@@ -15,6 +16,8 @@ const avatarEl = document.querySelector(".profile-avatar");
 const nameEl = document.querySelector(".profile-name");
 const bioEl = document.querySelector(".profile-bio");
 const statValueEls = document.querySelectorAll(".profile-stats strong");
+const dealsContainerEl = document.getElementById("account-deals-list");
+const dealsEmptyStateEl = document.getElementById("deals-empty-state");
 const editProfileBtn = document.getElementById("edit-profile-btn");
 const editForm = document.getElementById("edit-profile-form");
 const editBioInput = document.getElementById("edit-bio");
@@ -25,13 +28,14 @@ const editMessageEl = document.getElementById("edit-profile-message");
 
 let currentUser = null;
 let currentProfile = null;
+let currentDealsCount = 0;
 
 function toSafeCount(value) {
   const parsed = Number(value);
   return Number.isFinite(parsed) ? parsed : 0;
 }
 
-function updateProfileUI(user, profile = {}) {
+function updateProfileUI(user, profile = {}, dealsCount = null) {
   const displayName = getDisplayName(user, profile);
   const bio = profile.bio || "Tell us about yourself.";
   const profileImage = getProfileImage(user, profile, DEFAULT_AVATAR);
@@ -41,7 +45,7 @@ function updateProfileUI(user, profile = {}) {
   avatarEl.src = profileImage;
 
   const values = [
-    toSafeCount(profile.dealsPosted),
+    dealsCount ?? toSafeCount(profile.dealsPosted),
     toSafeCount(profile.likes),
     toSafeCount(profile.followers),
     toSafeCount(profile.savedDeals)
@@ -87,6 +91,114 @@ async function uploadProfileImageIfNeeded(user) {
   return getDownloadURL(imageRef);
 }
 
+function formatExpirationDate(expirationDate) {
+  if (!expirationDate) {
+    return "No expiration";
+  }
+
+  const parsed = new Date(expirationDate);
+  if (Number.isNaN(parsed.getTime())) {
+    return expirationDate;
+  }
+
+  return parsed.toLocaleDateString(undefined, {
+    month: "short",
+    day: "numeric",
+    year: "numeric"
+  });
+}
+
+function createDealCard(deal) {
+  const card = document.createElement("article");
+  card.className = "deal-card";
+
+  const main = document.createElement("div");
+  main.className = "deal-main";
+
+  const imageWrap = document.createElement("div");
+  imageWrap.className = "deal-picture";
+
+  if (deal.imageUrl) {
+    const image = document.createElement("img");
+    image.className = "deal-picture__img";
+    image.src = deal.imageUrl;
+    image.alt = deal.title ? `${deal.title} image` : "Deal image";
+    image.loading = "lazy";
+    imageWrap.appendChild(image);
+  } else {
+    imageWrap.textContent = "No Image";
+  }
+
+  const info = document.createElement("div");
+  info.className = "deal-info";
+
+  const tag = document.createElement("div");
+  tag.className = "deal-tag";
+  const discountStrong = document.createElement("strong");
+  discountStrong.textContent = deal.discountText || "Deal";
+  tag.appendChild(discountStrong);
+
+  const title = document.createElement("h2");
+  title.className = "deal-title";
+  title.textContent = deal.title || "Untitled Deal";
+
+  const meta = document.createElement("div");
+  meta.className = "deal-meta";
+  const likes = document.createElement("span");
+  likes.className = "badge badge--likes";
+  likes.textContent = `Likes ${toSafeCount(deal.likes)}`;
+  const dislikes = document.createElement("span");
+  dislikes.className = "badge badge--dislikes";
+  dislikes.textContent = `Dislikes ${toSafeCount(deal.dislikes)}`;
+  meta.append(likes, dislikes);
+
+  info.append(tag, title, meta);
+  main.append(imageWrap, info);
+
+  const details = document.createElement("div");
+  details.className = "deal-details";
+
+  const location = document.createElement("div");
+  const locationLabel = document.createElement("span");
+  locationLabel.className = "label";
+  locationLabel.textContent = "Location:";
+  location.append(locationLabel, document.createTextNode(` ${deal.location || "N/A"}`));
+
+  const time = document.createElement("div");
+  const timeLabel = document.createElement("span");
+  timeLabel.className = "label";
+  timeLabel.textContent = "Time:";
+  time.append(timeLabel, document.createTextNode(` ${deal.timeInfo || "N/A"}`));
+
+  const expiration = document.createElement("div");
+  const expirationLabel = document.createElement("span");
+  expirationLabel.className = "label";
+  expirationLabel.textContent = "Expires:";
+  expiration.append(expirationLabel, document.createTextNode(` ${formatExpirationDate(deal.expirationDate)}`));
+
+  details.append(location, time, expiration);
+
+  card.append(main, details);
+  return card;
+}
+
+function renderDeals(deals) {
+  dealsContainerEl.innerHTML = "";
+
+  if (!deals.length) {
+    dealsEmptyStateEl.style.display = "block";
+    return;
+  }
+
+  dealsEmptyStateEl.style.display = "none";
+
+  const fragment = document.createDocumentFragment();
+  deals.forEach((deal) => {
+    fragment.appendChild(createDealCard(deal));
+  });
+  dealsContainerEl.appendChild(fragment);
+}
+
 async function saveProfileChanges(event) {
   event.preventDefault();
 
@@ -118,7 +230,7 @@ async function saveProfileChanges(event) {
       profileImage
     };
 
-    updateProfileUI(currentUser, currentProfile);
+    updateProfileUI(currentUser, currentProfile, currentDealsCount);
     emitProfileUpdated(currentProfile);
     setStatusMessage(editMessageEl, "Profile updated successfully.", "success");
     setEditFormVisibility(false);
@@ -163,7 +275,11 @@ onAuthStateChanged(auth, async (user) => {
 
     currentUser = user;
     currentProfile = userDoc.data();
-    updateProfileUI(user, currentProfile);
+
+    const deals = await getDealsByUser(user.uid);
+    currentDealsCount = deals.length;
+    renderDeals(deals);
+    updateProfileUI(user, currentProfile, currentDealsCount);
     populateEditForm(currentProfile);
   } catch (error) {
     console.error("Unable to load account profile.", error);

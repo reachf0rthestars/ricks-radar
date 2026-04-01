@@ -22,15 +22,15 @@
   font-size: 0.85rem;
   border: 1px solid rgba(0, 0, 0, 0.08);
   background: #fff;
-  display: inline-flex; /* ensures visible */
+  display: inline-flex;
   align-items: center;
   gap: 0.35rem;
   cursor: pointer;
   transition: background 0.15s, transform 0.1s, box-shadow 0.15s;
-  color: #000; /* default text color */
+  color: #000;
 }
 
-.pill span.dot{
+.pill span.dot {
   width: 8px;
   height: 8px;
   border-radius: 50%;
@@ -41,11 +41,70 @@
 .services span.dot { background: var(--orange); }
 .other span.dot { background: var(--grey); }
 
-/* Active category pill: black background, white text */
 .categories .pill.active {
   background-color: #000;
   color: #fff;
-  filter: brightness(1); /* remove brightness effect from before */
+  filter: brightness(1);
+}
+
+.deal-time-row {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.input-hint {
+  font-size: 0.78rem;
+  color: #555;
+  margin-top: -0.35rem;
+}
+
+.themed-date {
+  background: linear-gradient(180deg, #fff, #f6f9ff);
+  border: 1px solid rgba(2, 107, 227, 0.28);
+  color: #14304e;
+  font-weight: 600;
+}
+
+.themed-date:focus {
+  outline: none;
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px rgba(2, 107, 227, 0.18);
+}
+
+.file-picker-wrap {
+  padding: 0.75rem;
+  border-radius: 12px;
+  border: 1px dashed rgba(2, 107, 227, 0.35);
+  background: linear-gradient(180deg, #f8fbff, #f3fff7);
+}
+
+.themed-file {
+  width: 100%;
+  border: 0;
+  padding: 0;
+  background: transparent;
+}
+
+.themed-file::file-selector-button {
+  border: 0;
+  border-radius: 999px;
+  padding: 0.45rem 0.9rem;
+  background: var(--blue);
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-right: 0.65rem;
+}
+
+.themed-file::file-selector-button:hover {
+  background: #015ac0;
+}
+
+.form-message {
+  min-height: 1.2rem;
+  margin-top: 0.2rem;
+  font-size: 0.88rem;
 }
   </style>
 </head>
@@ -54,7 +113,7 @@
 
   <!-- Slide-out Menu -->
   <div id="menu-overlay"></div>
- <nav id="side-menu">
+  <nav id="side-menu">
     <h2>Menu</h2>
     <ul>
       <li><a href="index.html">Home</a></li>
@@ -65,26 +124,25 @@
       <li><button id="logout-btn" class="logout-btn">Logout</button></li>
     </ul>
   </nav>
+
   <!-- Top Bar -->
   <header class="top-bar">
-    <button class="top-btn top-btn--secondary">☰ Menu</button>
+    <button class="top-btn top-btn--secondary" id="menu-btn">Menu</button>
   </header>
 
   <div class="auth-card" style="margin-top:5rem;">
     <h1 class="auth-title">Add a Deal</h1>
 
-    <form class="auth-form">
+    <form id="add-deal-form" class="auth-form">
+      <label for="deal-title">Deal Title</label>
+      <input id="deal-title" name="title" type="text" placeholder="50% Off Burgers" required>
 
-      <label>Deal Title</label>
-      <input type="text" placeholder="50% Off Burgers" required>
+      <label for="deal-discount">Discount type/title</label>
+      <input id="deal-discount" name="discountText" type="text" placeholder="50%" required>
 
-      <label>Discount type/title</label>
-      <input type="text" placeholder="50%" required>
+      <label for="deal-description">Description</label>
+      <textarea id="deal-description" name="description" placeholder="Describe the deal..." rows="3" required></textarea>
 
-      <label>Description</label>
-      <textarea placeholder="Describe the deal..." rows="3" required></textarea>
-
-      <!-- Categories Section -->
       <label>Categories</label>
       <div class="categories">
         <button type="button" class="pill category food" data-value="food">
@@ -101,24 +159,27 @@
         </button>
       </div>
 
-      <!-- Hidden input to store selected categories -->
       <input type="hidden" name="categories" id="selected-categories">
 
-      <label>Location</label>
-      <input type="text" placeholder="Downtown Rexburg" required>
+      <label for="deal-location">Location</label>
+      <input id="deal-location" name="location" type="text" placeholder="Downtown Rexburg" required>
 
-      <label>Time / Date</label>
-      <input type="text" placeholder="Fri–Sun, 5 PM – 9 PM" required>
-
-      <label>Expiration Date</label>
-      <input type="date" id="expiration-date" required>
-
-      <div class="image-upload">
-        <label>Upload Image (Optional)</label>
-        <input type="file" accept="image/*">
+      <div class="deal-time-row">
+        <label for="deal-time-info">Time / Date Details</label>
+        <input id="deal-time-info" name="timeInfo" type="text" placeholder="Fri-Sun, 5 PM - 9 PM" required>
       </div>
 
-      <button class="auth-btn">Submit Deal</button>
+      <label for="expiration-date">Expiration Date</label>
+      <input class="themed-date" type="date" id="expiration-date" name="expirationDate" required>
+      <p class="input-hint">Set when this deal should disappear.</p>
+
+      <div class="image-upload file-picker-wrap">
+        <label for="deal-image">Upload Image (Optional)</label>
+        <input class="themed-file" id="deal-image" name="dealImage" type="file" accept="image/*">
+      </div>
+
+      <p id="add-deal-message" class="form-message" aria-live="polite"></p>
+      <button id="submit-deal-btn" class="auth-btn" type="submit">Submit Deal</button>
     </form>
   </div>
 

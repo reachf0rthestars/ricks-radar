@@ -1,0 +1,294 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // ===============================================================
+    // Assumed Data Model
+    // ===============================================================
+    //
+    // Collection: users
+    // Document ID: {uid} (must equal authenticated uid)
+    // Fields:
+    //   - username: string (required, 3-20, [A-Za-z0-9_])
+    //   - usernameKey: string (required, lowercase 3-20, [a-z0-9_])
+    //   - displayName: string (required, 1-60)
+    //   - email: string (required, valid email, immutable)
+    //   - bio: string (required, 1-280)
+    //   - profileImage: string (required, empty or valid http/https URL)
+    //   - dealsPosted: number (required, >= 0)
+    //   - likes: number (required, >= 0)
+    //   - followers: number (required, >= 0)
+    //   - savedDeals: number (required, >= 0)
+    //   - createdAt: timestamp (required, immutable)
+    //   - updatedAt: timestamp (required)
+    //
+    // Collection: usernames
+    // Document ID: {usernameKey} (lowercase username)
+    // Fields:
+    //   - uid: string (required, immutable, equals request.auth.uid on create)
+    //   - originalUsername: string (required, 3-20, [A-Za-z0-9_])
+    //   - createdAt: timestamp (required, immutable)
+    //
+    // Collection: deals
+    // Document ID: auto-id
+    // Fields:
+    //   - title: string (required, 1-120)
+    //   - discountText: string (required, 1-40)
+    //   - description: string (required, 1-1000)
+    //   - categories: list<string> (required, 1-4 items, values limited to food/groceries/services/other)
+    //   - location: string (required, 1-120)
+    //   - timeInfo: string (required, 1-120)
+    //   - expirationDate: string (required, YYYY-MM-DD)
+    //   - imageUrl: string (required, empty or valid http/https URL)
+    //   - createdByUid: string (required, immutable, must match auth uid)
+    //   - createdByUsername: string (required, 1-30, immutable)
+    //   - createdByDisplayName: string (required, 1-60, immutable)
+    //   - likes: number (required, >= 0)
+    //   - dislikes: number (required, >= 0)
+    //   - createdAt: timestamp (required, immutable)
+    //   - updatedAt: timestamp (required)
+    //
+    // ===============================================================
+
+    // ===============================================================
+    // Helper Functions
+    // ===============================================================
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+
+    function hasRequiredFields(fields) {
+      return request.resource.data.keys().hasAll(fields);
+    }
+
+    function hasOnlyAllowedFields(fields) {
+      return request.resource.data.keys().hasOnly(fields);
+    }
+
+    function isValidEmail(email) {
+      return email is string
+        && email.size() <= 254
+        && email.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[A-Za-z]{2,}$");
+    }
+
+    function isValidUrl(url) {
+      return url is string
+        && (url.matches("^https://.*") || url.matches("^http://.*"));
+    }
+
+    function isEmptyOrUrl(url) {
+      return (url is string && url.size() == 0) || isValidUrl(url);
+    }
+
+    function isValidUsername(value) {
+      return value is string
+        && value.size() >= 3
+        && value.size() <= 20
+        && value.matches("^[A-Za-z0-9_]+$");
+    }
+
+    function isValidUsernameKey(value) {
+      return value is string
+        && value.size() >= 3
+        && value.size() <= 20
+        && value.matches("^[a-z0-9_]+$");
+    }
+
+    function isNonNegativeNumber(value) {
+      return value is number && value >= 0;
+    }
+
+    function isTimestamp(value) {
+      return value is timestamp;
+    }
+
+    function isValidDateString(value) {
+      return value is string && value.matches("^\\d{4}-\\d{2}-\\d{2}$");
+    }
+
+    function validString(value, minLen, maxLen) {
+      return value is string && value.size() >= minLen && value.size() <= maxLen;
+    }
+
+    function isValidCategories(values) {
+      return values is list
+        && values.size() >= 1
+        && values.size() <= 4
+        && values.hasOnly(['food', 'groceries', 'services', 'other']);
+    }
+
+    function unchanged(fields) {
+      return request.resource.data.diff(resource.data).affectedKeys().hasAny(fields) == false;
+    }
+
+    // Domain Validators
+    function isValidUser(data) {
+      return hasRequiredFields([
+          'username',
+          'usernameKey',
+          'displayName',
+          'email',
+          'bio',
+          'profileImage',
+          'dealsPosted',
+          'likes',
+          'followers',
+          'savedDeals',
+          'createdAt',
+          'updatedAt'
+        ])
+        && hasOnlyAllowedFields([
+          'username',
+          'usernameKey',
+          'displayName',
+          'email',
+          'bio',
+          'profileImage',
+          'dealsPosted',
+          'likes',
+          'followers',
+          'savedDeals',
+          'createdAt',
+          'updatedAt'
+        ])
+        && isValidUsername(data.username)
+        && isValidUsernameKey(data.usernameKey)
+        && validString(data.displayName, 1, 60)
+        && isValidEmail(data.email)
+        && validString(data.bio, 1, 280)
+        && isEmptyOrUrl(data.profileImage)
+        && isNonNegativeNumber(data.dealsPosted)
+        && isNonNegativeNumber(data.likes)
+        && isNonNegativeNumber(data.followers)
+        && isNonNegativeNumber(data.savedDeals)
+        && isTimestamp(data.createdAt)
+        && isTimestamp(data.updatedAt);
+    }
+
+    function isValidUsernameMap(data) {
+      return hasRequiredFields(['uid', 'originalUsername', 'createdAt'])
+        && hasOnlyAllowedFields(['uid', 'originalUsername', 'createdAt'])
+        && data.uid is string
+        && data.uid.size() >= 20
+        && data.uid.size() <= 128
+        && isValidUsername(data.originalUsername)
+        && isTimestamp(data.createdAt);
+    }
+
+    function isValidDeal(data) {
+      return hasRequiredFields([
+          'title',
+          'discountText',
+          'description',
+          'categories',
+          'location',
+          'timeInfo',
+          'expirationDate',
+          'imageUrl',
+          'createdByUid',
+          'createdByUsername',
+          'createdByDisplayName',
+          'likes',
+          'dislikes',
+          'createdAt',
+          'updatedAt'
+        ])
+        && hasOnlyAllowedFields([
+          'title',
+          'discountText',
+          'description',
+          'categories',
+          'location',
+          'timeInfo',
+          'expirationDate',
+          'imageUrl',
+          'createdByUid',
+          'createdByUsername',
+          'createdByDisplayName',
+          'likes',
+          'dislikes',
+          'createdAt',
+          'updatedAt'
+        ])
+        && validString(data.title, 1, 120)
+        && validString(data.discountText, 1, 40)
+        && validString(data.description, 1, 1000)
+        && isValidCategories(data.categories)
+        && validString(data.location, 1, 120)
+        && validString(data.timeInfo, 1, 120)
+        && isValidDateString(data.expirationDate)
+        && isEmptyOrUrl(data.imageUrl)
+        && data.createdByUid is string
+        && data.createdByUid.size() >= 20
+        && data.createdByUid.size() <= 128
+        && validString(data.createdByUsername, 1, 30)
+        && validString(data.createdByDisplayName, 1, 60)
+        && isNonNegativeNumber(data.likes)
+        && isNonNegativeNumber(data.dislikes)
+        && isTimestamp(data.createdAt)
+        && isTimestamp(data.updatedAt);
+    }
+
+    match /users/{userId} {
+      allow read: if isOwner(userId);
+      allow create: if isOwner(userId)
+        && isValidUser(request.resource.data)
+        && request.resource.data.usernameKey == request.resource.data.username.lower()
+        && request.resource.data.email == request.auth.token.email;
+      allow update: if isOwner(userId)
+        && isValidUser(request.resource.data)
+        && request.resource.data.usernameKey == resource.data.usernameKey
+        && request.resource.data.username == resource.data.username
+        && request.resource.data.email == resource.data.email
+        && request.resource.data.createdAt == resource.data.createdAt
+        && request.resource.data.dealsPosted >= resource.data.dealsPosted;
+      allow delete: if false;
+    }
+
+    match /usernames/{usernameKey} {
+      allow read: if isAuthenticated();
+      allow create: if isAuthenticated()
+        && isValidUsernameMap(request.resource.data)
+        && isValidUsernameKey(usernameKey)
+        && request.resource.data.uid == request.auth.uid
+        && request.resource.data.originalUsername.lower() == usernameKey;
+      allow update: if isAuthenticated()
+        && resource.data.uid == request.auth.uid
+        && isValidUsernameMap(request.resource.data)
+        && request.resource.data.uid == resource.data.uid
+        && request.resource.data.originalUsername == resource.data.originalUsername
+        && request.resource.data.createdAt == resource.data.createdAt
+        && request.resource.data.originalUsername.lower() == usernameKey;
+      allow delete: if false;
+    }
+
+    match /deals/{dealId} {
+      allow read: if isAuthenticated();
+      allow create: if isAuthenticated()
+        && isValidDeal(request.resource.data)
+        && request.resource.data.createdByUid == request.auth.uid
+        && request.resource.data.likes == 0
+        && request.resource.data.dislikes == 0;
+      allow update: if isAuthenticated()
+        && resource.data.createdByUid == request.auth.uid
+        && isValidDeal(request.resource.data)
+        && request.resource.data.createdByUid == resource.data.createdByUid
+        && request.resource.data.createdByUsername == resource.data.createdByUsername
+        && request.resource.data.createdByDisplayName == resource.data.createdByDisplayName
+        && request.resource.data.createdAt == resource.data.createdAt;
+      allow delete: if isAuthenticated() && resource.data.createdByUid == request.auth.uid;
+    }
+
+    match /connection_test/{docId} {
+      allow read: if isAuthenticated();
+      allow write: if false;
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

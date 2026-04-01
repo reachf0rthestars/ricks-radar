@@ -212,6 +212,15 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  min-height: 122px;
+  overflow: hidden;
+}
+
+.deal-picture__img {
+  width: 100%;
+  height: 100%;
+  min-height: 122px;
+  object-fit: cover;
 }
 
 .deal-info {
@@ -463,6 +472,15 @@
   min-height: 1.2rem;
   margin: 0;
   font-size: 0.9rem;
+}
+
+.account-empty-state {
+  margin: 0 0 1rem;
+  padding: 0.8rem 0.9rem;
+  background: #f3f8ff;
+  border: 1px solid rgba(2, 107, 227, 0.2);
+  border-radius: 10px;
+  color: #305277;
 }
 
 /* ------------------------------

@@ -8,7 +8,10 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "echo \"No build step required for static HTML/CSS/JS\""
+    "build": "echo \"No build step required for static HTML/CSS/JS\"",
+    "emulators": "npx.cmd -y firebase-tools@latest emulators:start",
+    "emulators:seed": "npx.cmd -y firebase-tools@latest emulators:start --import=.firebase-data --export-on-exit=.firebase-data",
+    "emulators:exec": "npx.cmd -y firebase-tools@latest emulators:exec --only auth,firestore,storage,hosting \"echo Emulator run complete\""
   },
   "repository": {
     "type": "git",

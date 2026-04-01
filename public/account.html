@@ -4,21 +4,16 @@
   <meta charset="UTF-8">
   <title>Your Account</title>
 
-  <!-- Styles -->
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/components.css">
   <link rel="stylesheet" href="css/pages.css">
 
-  <!-- Scripts -->
   <script type="module" src="backend/pages/account-page.js"></script>
 </head>
 
 <body>
-
-  <!-- Overlay -->
   <div id="menu-overlay"></div>
 
-  <!-- Slide-out Menu -->
   <nav id="side-menu">
     <h2>Menu</h2>
     <ul>
@@ -31,15 +26,11 @@
     </ul>
   </nav>
 
-  <!-- Top Bar -->
   <header class="top-bar">
-    <button class="top-btn top-btn--secondary" id="menu-btn">☰ Menu</button>
+    <button class="top-btn top-btn--secondary" id="menu-btn">Menu</button>
   </header>
 
-  <!-- Page Container -->
   <div class="page">
-
-    <!-- Profile Header -->
     <section class="profile-header">
       <img class="profile-avatar" src="https://via.placeholder.com/120" alt="avatar">
 
@@ -64,56 +55,28 @@
 
       <div class="profile-stats">
         <div>
-          <strong>12</strong>
+          <strong>0</strong>
           <span>Deals Posted</span>
         </div>
         <div>
-          <strong>480</strong>
+          <strong>0</strong>
           <span>Likes</span>
         </div>
         <div>
-          <strong>132</strong>
+          <strong>0</strong>
           <span>Followers</span>
         </div>
         <div>
-          <strong>75</strong>
+          <strong>0</strong>
           <span>Saved</span>
         </div>
       </div>
     </section>
 
-    <!-- Deals Section -->
     <h3 class="section-title">Your Deals</h3>
+    <p id="deals-empty-state" class="account-empty-state" style="display:none;">You haven't posted any deals yet. Add your first one now.</p>
 
-    <main class="deals">
-
-      <!-- Example Deal -->
-      <article class="deal-card">
-        <div class="deal-main">
-          <div class="deal-picture">Pic</div>
-
-          <div class="deal-info">
-            <div class="deal-tag">
-              <strong>20% OFF</strong>
-            </div>
-
-            <h2 class="deal-title">Taco Tuesday Special</h2>
-
-            <div class="deal-meta">
-              <button class="badge badge--likes">👍 120</button>
-              <button class="badge badge--dislikes">👎 12</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="deal-details">
-          <div><span class="label">Location:</span> Main Street</div>
-          <div><span class="label">Time:</span> Tuesdays 5–9 PM</div>
-        </div>
-      </article>
-
-    </main>
-
+    <main class="deals" id="account-deals-list"></main>
   </div>
 
 </body>
