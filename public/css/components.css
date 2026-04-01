@@ -230,21 +230,59 @@
 .food_tag {
   background: var(--green);
   color: white;
+  border-radius: 999px;
+  padding: 0.25rem 0.6rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  display: inline-flex;
+  gap: 0.35rem;
 }
 
 .groceries_tag {
   background: var(--blue);
   color: white;
+  border-radius: 999px;
+  padding: 0.25rem 0.6rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  display: inline-flex;
+  gap: 0.35rem;
 }
 
 .services_tag {
   background: var(--orange);
   color: white;
+  border-radius: 999px;
+  padding: 0.25rem 0.6rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  display: inline-flex;
+  gap: 0.35rem;
 }
 
 .other_tag {
   background: var(--grey);
   color: white;
+  border-radius: 999px;
+  padding: 0.25rem 0.6rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  display: inline-flex;
+  gap: 0.35rem;
+}
+
+.deal-row {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem; /* controls spacing between text and tag */
+}
+
+.deal-row .time-date {
+  white-space: nowrap;
+}
+
+.deal-row .category {
+  margin-left: 0.5rem; /* keeps it close, not far right */
 }
 
 /* ------------------------------
