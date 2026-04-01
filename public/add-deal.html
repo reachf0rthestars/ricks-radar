@@ -8,53 +8,56 @@
   <link rel="stylesheet" href="css/pages.css">
   <script type="module" src="backend/pages/add-deal-page.js"></script>
   <style>
-   /* Categories Section */
-.categories {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-bottom: 1rem;
-}
+    .categories {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
 
-.pill {
-  border-radius: 999px;
-  padding: 0.4rem 0.9rem;
-  font-size: 0.85rem;
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  background: #fff;
-  display: inline-flex; /* ensures visible */
-  align-items: center;
-  gap: 0.35rem;
-  cursor: pointer;
-  transition: background 0.15s, transform 0.1s, box-shadow 0.15s;
-  color: #000; /* default text color */
-}
+    .pill {
+      border-radius: 999px;
+      padding: 0.4rem 0.9rem;
+      font-size: 0.85rem;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      background: #fff;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      cursor: pointer;
+      transition: background 0.15s, transform 0.1s, box-shadow 0.15s;
+      color: #000;
+    }
 
-.pill span.dot{
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-}
+    .pill span.dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
 
-.food span.dot { background: var(--green); }
-.groceries span.dot { background: var(--blue); }
-.services span.dot { background: var(--orange); }
-.other span.dot { background: var(--grey); }
+    .food span.dot { background: var(--green); }
+    .groceries span.dot { background: var(--blue); }
+    .services span.dot { background: var(--orange); }
+    .other span.dot { background: var(--grey); }
 
-/* Active category pill: black background, white text */
-.categories .pill.active {
-  background-color: #000;
-  color: #fff;
-  filter: brightness(1); /* remove brightness effect from before */
-}
+    .categories .pill.active {
+      background-color: #000;
+      color: #fff;
+      filter: brightness(1);
+    }
+
+    #add-deal-message {
+      min-height: 1.2rem;
+      margin-top: 0.25rem;
+      font-size: 0.9rem;
+      text-align: center;
+    }
   </style>
 </head>
 
 <body class="auth-body">
-
-  <!-- Slide-out Menu -->
   <div id="menu-overlay"></div>
- <nav id="side-menu">
+  <nav id="side-menu">
     <h2>Menu</h2>
     <ul>
       <li><a href="index.html">Home</a></li>
@@ -65,26 +68,24 @@
       <li><button id="logout-btn" class="logout-btn">Logout</button></li>
     </ul>
   </nav>
-  <!-- Top Bar -->
+
   <header class="top-bar">
-    <button class="top-btn top-btn--secondary">☰ Menu</button>
+    <button class="top-btn top-btn--secondary" id="menu-btn">Menu</button>
   </header>
 
   <div class="auth-card" style="margin-top:5rem;">
     <h1 class="auth-title">Add a Deal</h1>
 
-    <form class="auth-form">
+    <form class="auth-form" id="add-deal-form">
+      <label for="deal-title">Deal Title</label>
+      <input id="deal-title" type="text" placeholder="50% Off Burgers" required>
 
-      <label>Deal Title</label>
-      <input type="text" placeholder="50% Off Burgers" required>
+      <label for="deal-discount">Discount type/title</label>
+      <input id="deal-discount" type="text" placeholder="50%" required>
 
-      <label>Discount type/title</label>
-      <input type="text" placeholder="50%" required>
+      <label for="deal-description">Description</label>
+      <textarea id="deal-description" placeholder="Describe the deal..." rows="3" required></textarea>
 
-      <label>Description</label>
-      <textarea placeholder="Describe the deal..." rows="3" required></textarea>
-
-      <!-- Categories Section -->
       <label>Categories</label>
       <div class="categories">
         <button type="button" class="pill category food" data-value="food">
@@ -101,26 +102,25 @@
         </button>
       </div>
 
-      <!-- Hidden input to store selected categories -->
       <input type="hidden" name="categories" id="selected-categories">
 
-      <label>Location</label>
-      <input type="text" placeholder="Downtown Rexburg" required>
+      <label for="deal-location">Location</label>
+      <input id="deal-location" type="text" placeholder="Downtown Rexburg" required>
 
-      <label>Time / Date</label>
-      <input type="text" placeholder="Fri–Sun, 5 PM – 9 PM" required>
+      <label for="deal-time">Time / Date</label>
+      <input id="deal-time" type="text" placeholder="Fri-Sun, 5 PM - 9 PM" required>
 
-      <label>Expiration Date</label>
+      <label for="expiration-date">Expiration Date</label>
       <input type="date" id="expiration-date" required>
 
       <div class="image-upload">
-        <label>Upload Image (Optional)</label>
-        <input type="file" accept="image/*">
+        <label for="deal-image">Upload Image (Optional)</label>
+        <input id="deal-image" type="file" accept="image/*">
       </div>
 
-      <button class="auth-btn">Submit Deal</button>
+      <button id="submit-deal-btn" class="auth-btn" type="submit">Submit Deal</button>
+      <p id="add-deal-message" aria-live="polite"></p>
     </form>
   </div>
-
 </body>
 </html>

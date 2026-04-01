@@ -196,6 +196,21 @@
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
 }
 
+.deal-top-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.8rem;
+  margin-bottom: 0.7rem;
+}
+
+.deal-top-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.45rem;
+}
+
 .deal-main {
   display: grid;
   grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.6fr);
@@ -214,6 +229,18 @@
   justify-content: center;
 }
 
+.deal-picture--image {
+  background: #f4f7fb;
+  padding: 0.35rem;
+}
+
+.deal-picture img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
 .deal-info {
   display: flex;
   flex-direction: column;
@@ -221,14 +248,60 @@
 }
 
 .deal-tag {
+  display: inline-flex;
+  gap: 0.35rem;
+  flex-wrap: wrap;
+}
+
+.deal-chip {
   background: rgba(2, 107, 227, 0.08);
   color: var(--blue);
   border-radius: 999px;
   padding: 0.25rem 0.6rem;
   font-size: 0.75rem;
   font-weight: 600;
+  text-transform: capitalize;
+}
+
+.deal-discount {
+  color: var(--blue);
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.deal-submitter {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: #fff;
+  border-radius: 999px;
+  padding: 0.2rem 0.45rem 0.2rem 0.2rem;
   display: inline-flex;
+  align-items: center;
   gap: 0.35rem;
+  cursor: pointer;
+}
+
+.deal-submitter img {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.deal-submitter span {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #2d2d2d;
+}
+
+.deal-delete-btn {
+  border: none;
+  border-radius: 999px;
+  background: #b3261e;
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.3rem 0.7rem;
+  cursor: pointer;
 }
 
 .deal-title {
@@ -465,6 +538,20 @@
   font-size: 0.9rem;
 }
 
+.deals-empty-message {
+  color: #4c4c4c;
+  text-align: center;
+  font-size: 0.95rem;
+  margin-top: 0.4rem;
+}
+
+.account-page-message {
+  min-height: 1.2rem;
+  margin: 0 0 0.45rem;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
 /* ------------------------------
    MOBILE
 ------------------------------ */
@@ -484,5 +571,14 @@
   .top-profile-badge--signed-out .top-profile-badge__name,
   .top-profile-badge--logout .top-profile-badge__name {
     display: inline;
+  }
+
+  .deal-top-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .deal-top-actions {
+    align-items: flex-start;
   }
 }

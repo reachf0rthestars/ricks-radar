@@ -2,23 +2,18 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Rick's Radar – Deals</title>
+  <title>Rick's Radar - Deals</title>
 
-  <!-- Styles -->
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/components.css">
   <link rel="stylesheet" href="css/pages.css">
 
-  <!-- Scripts -->
   <script type="module" src="backend/pages/index-page.js"></script>
 </head>
 
 <body>
-
-  <!-- Overlay -->
   <div id="menu-overlay"></div>
 
-  <!-- Slide-out Menu -->
   <nav id="side-menu">
     <h2>Menu</h2>
     <ul>
@@ -31,23 +26,16 @@
     </ul>
   </nav>
 
-  <!-- Page Container -->
   <div class="page">
-
-    <!-- Top Bar -->
     <header class="top-bar">
-      <button class="top-btn top-btn--secondary" id="menu-btn">☰ Menu</button>
+      <button class="top-btn top-btn--secondary" id="menu-btn">Menu</button>
     </header>
 
-    <!-- Header Section -->
     <div class="header">
-
-      <!-- Logo -->
       <div class="logo-wrap">
         <img class="logo-img" src="./images/Horiz-Logo.png" alt="Rick's Radar Logo" width="320" height="140">
       </div>
 
-      <!-- Filters -->
       <div class="filters">
         <button class="pill pill--primary">
           <span class="dot"></span>
@@ -72,72 +60,8 @@
       </div>
     </div>
 
-    <!-- Deals Section -->
-    <main class="deals">
-
-      <!-- Deal Card 1 -->
-      <article class="deal-card">
-        <div class="deal-main">
-          <div class="deal-picture">Picture</div>
-
-          <div class="deal-info">
-            <div class="deal-tag">
-              <strong>35% OFF</strong>
-              <span>Limited time</span>
-            </div>
-
-            <h2 class="deal-title">Eye-catching Deal Title Goes Here</h2>
-
-            <div class="deal-meta">
-              <button class="badge badge--likes">👍 320 likes</button>
-              <button class="badge badge--dislikes">👎 12 dislikes</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="deal-details">
-          <div>
-            <span class="label">Description:</span>
-            Cozy local spot with great food and a vibrant atmosphere.
-          </div>
-          <div>
-            <span class="label">Location:</span>
-            Downtown Rexburg
-          </div>
-          <div>
-            <span class="label">Time/Date:</span>
-            Fri–Sun, 5 PM – 9 PM
-          </div>
-        </div>
-      </article>
-
-      <!-- Deal Card 2 -->
-      <article class="deal-card deal-card--secondary">
-        <h2 class="deal-title">Second Deal – Full Width Highlight</h2>
-
-        <div class="deal-meta" style="margin: 0.4rem 0 0.6rem;">
-          <button class="badge badge--likes">👍 210 likes</button>
-          <button class="badge badge--dislikes">👎 13 dislikes</button>
-        </div>
-
-        <div class="deal-details">
-          <div>
-            <span class="label">Description:</span>
-            Another great offer with a bold highlight area for extra attention.
-          </div>
-          <div>
-            <span class="label">Location:</span>
-            Nearby campus
-          </div>
-          <div>
-            <span class="label">Time/Date:</span>
-            All week, 11 AM – 8 PM
-          </div>
-        </div>
-      </article>
-
-    </main>
+    <main class="deals" id="home-deals-list"></main>
+    <p id="home-deals-empty" class="deals-empty-message" style="display:none;">No deals have been posted yet.</p>
   </div>
-
 </body>
 </html>
