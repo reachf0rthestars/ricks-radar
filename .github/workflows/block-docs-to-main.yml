@@ -1,0 +1,16 @@
+name: Block Docs PR Into Main
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  block_docs_branch_pr:
+    if: ${{ github.head_ref == 'docs' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Block merge from docs into main
+        run: |
+          echo "PRs from 'docs' into 'main' are blocked by policy."
+          echo "Use docs branch for documentation deployment only."
+          exit 1
