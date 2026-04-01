@@ -2,8 +2,15 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+<<<<<<< HEAD
   <title>Rick's Radar - Deals</title>
 
+=======
+  
+  <title>Rick's Radar – Deals</title>
+  <link rel="shortcut icon" href="./images/ricks_radar_logo.png" type="image/png">
+  <!-- Styles -->
+>>>>>>> 6f9c011487c1d42a5efb3f8108dce4e3f27dc99d
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/components.css">
   <link rel="stylesheet" href="css/pages.css">
@@ -16,12 +23,12 @@
 
   <nav id="side-menu">
     <h2>Menu</h2>
-    <ul>
+        <ul>
       <li><a href="index.html">Home</a></li>
       <li><a href="add-deal.html">Add Deal</a></li>
-      <li><a href="account.html">Account</a></li>
-      <li><a href="login.html">Login</a></li>
       <li><a href="about.html">About Us</a></li>
+      <li><a href="login.html">Login</a></li>
+      <li><a href="account.html">Account</a></li>
       <li><button id="logout-btn" class="logout-btn">Logout</button></li>
     </ul>
   </nav>
@@ -33,8 +40,11 @@
 
     <div class="header">
       <div class="logo-wrap">
-        <img class="logo-img" src="./images/Horiz-Logo.png" alt="Rick's Radar Logo" width="320" height="140">
-      </div>
+  <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">
+    <img class="logo-img" src="./images/Horiz-Logo.png" alt="Rick's Radar Logo" width="320" height="140">
+  </a>
+</div>
+
 
       <div class="filters">
         <button class="pill pill--primary">
@@ -60,8 +70,83 @@
       </div>
     </div>
 
+<<<<<<< HEAD
     <main class="deals" id="home-deals-list"></main>
     <p id="home-deals-empty" class="deals-empty-message" style="display:none;">No deals have been posted yet.</p>
+=======
+    <!-- Deals Section -->
+    <main class="deals">
+
+      <!-- Deal Card 1 -->
+      <article class="deal-card">
+        <div class="deal-main">
+          <div class="deal-picture">Picture</div>
+
+          <div class="deal-info">
+            <div class="deal-tag">
+              <strong>35% OFF</strong>
+              <span>Limited time</span>
+            </div>
+
+            <h2 class="deal-title">Eye-catching Deal Title Goes Here</h2>
+
+            <div class="deal-meta">
+              <button class="badge badge--likes">👍 320 likes</button>
+              <button class="badge badge--dislikes">👎 12 dislikes</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="deal-details">
+          <div>
+            <span class="label">Description:</span>
+            Cozy local spot with great food and a vibrant atmosphere.
+          </div>
+          <div>
+            <span class="label">Location:</span>
+            Downtown Rexburg
+          </div>
+          <div class="deal-row">
+            <div>
+              <span class="label">Time/Date:</span>
+              Fri–Sun, 5 PM – 9 PM
+            </div>
+            <span class="category food food_tag">Food</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Deal Card 2 -->
+      <article class="deal-card deal-card--secondary">
+        <h2 class="deal-title">Second Deal – Full Width Highlight</h2>
+
+        <div class="deal-meta" style="margin: 0.4rem 0 0.6rem;">
+          <button class="badge badge--likes">👍 210 likes</button>
+          <button class="badge badge--dislikes">👎 13 dislikes</button>
+        </div>
+
+        <div class="deal-details">
+          <div>
+            <span class="label">Description:</span>
+            Another great offer with a bold highlight area for extra attention.
+          </div>
+          <div>
+            <span class="label">Location:</span>
+            Nearby campus
+          </div>
+          <div class="deal-row">
+            <div>
+              <span class="label">Time/Date:</span>
+              All week, 11 AM – 8 PM
+            </div>
+
+            <span class="category other other_tag">Other</span>
+          </div>
+        </div>
+      </article>
+
+    </main>
+>>>>>>> 6f9c011487c1d42a5efb3f8108dce4e3f27dc99d
   </div>
 </body>
 </html>
