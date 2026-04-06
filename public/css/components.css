@@ -161,21 +161,10 @@
   border-radius: 50%;
 }
 
-.food span.dot { 
-  background: var(--green); 
-}
-
-.groceries span.dot { 
-  background: var(--blue); 
-}
-
-.services span.dot { 
-  background: var(--orange); 
-}
-
-.other span.dot { 
-  background: var(--grey); 
-}
+.food span.dot { background: var(--green); }
+.groceries span.dot { background: var(--blue); }
+.services span.dot { background: var(--orange); }
+.other span.dot { background: var(--grey); }
 
 .pill--primary {
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
@@ -188,117 +177,6 @@
 .pill:hover {
   transform: translateY(-1px);
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
-}
-
-/* Tags */
-
-html {
-  scrollbar-gutter: stable;
-}
-
-.category {
-  border-radius: 999px;
-  padding: 0.4rem 0.9rem;
-  font-size: 0.85rem;
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  background: #fff;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  cursor: pointer;
-  transition: background 0.15s, transform 0.1s, box-shadow 0.15s;
-}
-
-.food_tag {
-  background: var(--green);
-  color: white;
-}
-
-.groceries_tag {
-  background: var(--blue);
-  color: white;
-}
-
-.services_tag {
-  background: var(--orange);
-  color: white;
-}
-
-.other_tag {
-  background: var(--grey);
-  color: white;
-}
-
-/* Tags */
-.category {
-  border-radius: 999px;
-  padding: 0.4rem 0.9rem;
-  font-size: 0.85rem;
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  background: #fff;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  cursor: pointer;
-  transition: background 0.15s, transform 0.1s, box-shadow 0.15s;
-}
-
-.food_tag {
-  background: var(--green);
-  color: white;
-  border-radius: 999px;
-  padding: 0.25rem 0.6rem;
-  font-size: 0.75rem;
-  font-weight: 600;
-  display: inline-flex;
-  gap: 0.35rem;
-}
-
-.groceries_tag {
-  background: var(--blue);
-  color: white;
-  border-radius: 999px;
-  padding: 0.25rem 0.6rem;
-  font-size: 0.75rem;
-  font-weight: 600;
-  display: inline-flex;
-  gap: 0.35rem;
-}
-
-.services_tag {
-  background: var(--orange);
-  color: white;
-  border-radius: 999px;
-  padding: 0.25rem 0.6rem;
-  font-size: 0.75rem;
-  font-weight: 600;
-  display: inline-flex;
-  gap: 0.35rem;
-}
-
-.other_tag {
-  background: var(--grey);
-  color: white;
-  border-radius: 999px;
-  padding: 0.25rem 0.6rem;
-  font-size: 0.75rem;
-  font-weight: 600;
-  display: inline-flex;
-  gap: 0.35rem;
-}
-
-.deal-row {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem; /* controls spacing between text and tag */
-}
-
-.deal-row .time-date {
-  white-space: nowrap;
-}
-
-.deal-row .category {
-  margin-left: 0.5rem; /* keeps it close, not far right */
 }
 
 /* ------------------------------
